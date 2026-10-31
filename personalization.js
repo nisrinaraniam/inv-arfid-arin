@@ -1,11 +1,14 @@
 export const wedding={
+  // Google Apps Script Web App URL untuk integrasi Spreadsheet Database
+  // Ganti URL di bawah ini dengan URL hasil Deploy Google Apps Script Anda:
+  gasEndpoint:'https://script.google.com/macros/s/GANTI_DENGAN_ID_DEPLOYMENT_ANDA/exec',
   groom:{nickname:'Arfid',name:'Arfid Gamal S.T',parents:'First son of Mr. Capt. H. Gamluddin, M.Mar. & Mrs. Hj. Ida Faridah, S.H.I.'},
   bride:{nickname:'Arin',name:'dr. Vanetka Daarin Haya',parents:'First daughter of the late Mr. H. Irpan, S.Sos., M.M. & Mrs. Hj. Henny Arifianti, S.Sos.'},
   date:'2026-12-05',start:'2026-12-05T19:00:00+08:00',dateLabel:'Saturday, 5 December 2026',timeLabel:'7:00 PM WITA',
   event:'Intimate Dinner',venue:'Grand Ballroom Hotel Aruna Senggigi Resort & Convention',
   address:'Jl. Raya Senggigi, Senggigi, Kec. Batu Layar, Kabupaten Lombok Barat, Nusa Tenggara Bar. 83355',
   map:'https://maps.app.goo.gl/nTXHCgNFbq2P4xjP6?g_st=ic',
-  photos:[{"src": "/assets/couple/couple-main.jpg", "alt": "Arfid and Arin on the hill"}, {"src": "/assets/couple/couple-embrace.jpg", "alt": "Arfid and Arin in a warm embrace"}, {"src": "/assets/couple/couple-garden.jpg", "alt": "A cherished moment with Arfid and Arin"}, {"src": "/assets/couple/couple-sunset.jpg", "alt": "Arfid and Arin at sunset"}]
+  photos:[{"src":"/assets/couple/moment-her01668.jpg","alt":"Arfid and Arin holding a bouquet on the coastal hill","pos":"50% 50%"},{"src":"/assets/couple/moment-her02438.jpg","alt":"Arfid and Arin walking hand in hand on the hill","pos":"50% 45%"},{"src":"/assets/couple/moment-dsc09889.jpg","alt":"Arfid and Arin sharing a warm gaze","pos":"52% 65%"},{"src":"/assets/couple/moment-her03836.jpg","alt":"Arfid and Arin in a joyful embrace by the sea","pos":"50% 50%"},{"src":"/assets/couple/moment-her03678.jpg","alt":"Arfid and Arin at golden hour on the beach","pos":"46% 55%"},{"src":"/assets/couple/moment-her04254.jpg","alt":"Arfid and Arin embracing under the fireworks","pos":"50% 42%"}]
 };
 
 export const loveStory=[
@@ -51,16 +54,79 @@ export function createPersonalization(React,Motion){
  };
 
  function Family(){
+  const isReduced=reduced();
   return h('section',{id:'mempelai',className:'personal-family'},
-   h('div',{className:'personal-family-curtain','aria-hidden':true}),
-   wrap('div',{className:'personal-family-inner'},
-    h('p',{className:'personal-eyebrow'},'With joyful hearts'),
-    h('h2',{className:'personal-heading'},'The Couple'),
-    h('p',{className:'personal-intro'},'Together with our families, we joyfully invite you to celebrate our wedding.'),
+   h(Motion.div,{
+     className:'personal-family-curtain',
+     'aria-hidden':true,
+     initial:!isReduced?{scale:1.05,opacity:0.88}:{opacity:1},
+     whileInView:{scale:1,opacity:1},
+     viewport:{once:false,amount:0.25},
+     transition:{duration:1.35,ease:[0.22,1,0.36,1]}
+   }),
+   h('div',{className:'personal-family-inner'},
+    h(Motion.div,{
+      className:'personal-family-header',
+      initial:!isReduced?{opacity:0,y:-16,filter:'blur(5px)'}:{opacity:1},
+      whileInView:{opacity:1,y:0,filter:'blur(0px)'},
+      viewport:{once:false,amount:0.3},
+      transition:{duration:0.9,ease:[0.22,1,0.36,1]}
+    },
+     h('p',{className:'personal-eyebrow'},'With joyful hearts'),
+     h('h2',{className:'personal-heading'},'The Couple'),
+     h('p',{className:'personal-intro'},'Together with our families, we joyfully invite you to celebrate our wedding.')
+    ),
     h('div',{className:'personal-couple'},
-     h('div',{className:'personal-person'},h('p',{className:'personal-nickname'},wedding.groom.nickname),h('h3',null,wedding.groom.name),parentLines(wedding.groom.parents)),
-     h('span',{className:'personal-amp','aria-hidden':true},'&'),
-     h('div',{className:'personal-person'},h('p',{className:'personal-nickname'},wedding.bride.nickname),h('h3',null,wedding.bride.name),parentLines(wedding.bride.parents))
+     h(Motion.div,{
+       className:'personal-person personal-person-left',
+       initial:!isReduced?{opacity:0,x:-30,y:10,filter:'blur(6px)'}:{opacity:1},
+       whileInView:{opacity:1,x:0,y:0,filter:'blur(0px)'},
+       viewport:{once:false,amount:0.25},
+       transition:{duration:1.05,delay:0.15,ease:[0.16,1,0.3,1]}
+     },
+      h(Motion.p,{
+        className:'personal-nickname',
+        initial:!isReduced?{opacity:0,x:-18,scale:0.94}:{opacity:1},
+        whileInView:{opacity:1,x:0,scale:1},
+        viewport:{once:false,amount:0.25},
+        transition:{duration:0.95,delay:0.22,ease:[0.16,1,0.3,1]}
+      },wedding.bride.nickname),
+      h(Motion.span,{
+        className:'personal-person-divider',
+        'aria-hidden':true,
+        initial:!isReduced?{scaleX:0,opacity:0}:{opacity:0.7},
+        whileInView:{scaleX:1,opacity:0.7},
+        viewport:{once:false,amount:0.25},
+        transition:{duration:0.8,delay:0.32,ease:[0.22,1,0.36,1]}
+      }),
+      h('h3',null,wedding.bride.name),
+      parentLines(wedding.bride.parents)
+     ),
+     h(Motion.div,{
+       className:'personal-person personal-person-right',
+       initial:!isReduced?{opacity:0,x:30,y:10,filter:'blur(6px)'}:{opacity:1},
+       whileInView:{opacity:1,x:0,y:0,filter:'blur(0px)'},
+       viewport:{once:false,amount:0.25},
+       transition:{duration:1.05,delay:0.3,ease:[0.16,1,0.3,1]}
+     },
+      h(Motion.p,{
+        className:'personal-nickname',
+        initial:!isReduced?{opacity:0,x:18,scale:0.94}:{opacity:1},
+        whileInView:{opacity:1,x:0,scale:1},
+        viewport:{once:false,amount:0.25},
+        transition:{duration:0.95,delay:0.36,ease:[0.16,1,0.3,1]}
+      },wedding.groom.nickname),
+      h(Motion.span,{
+        className:'personal-person-divider',
+        'aria-hidden':true,
+        initial:!isReduced?{scaleX:0,opacity:0}:{opacity:0.7},
+        whileInView:{scaleX:1,opacity:0.7},
+        viewport:{once:false,amount:0.25},
+        transition:{duration:0.8,delay:0.46,ease:[0.22,1,0.36,1]}
+      }),
+      h('h3',null,wedding.groom.name),
+      parentLines(wedding.groom.parents)
+     )
     )
    )
   );
@@ -181,13 +247,18 @@ export function createPersonalization(React,Motion){
     h('p',{className:'personal-eyebrow'},'Arfid & Arin'),
     h('h2',{className:'personal-heading'},'Moments in Frames'),
     h('div',{className:'personal-gallery-grid'},
-     ...wedding.photos.map((p,i)=>h('button',{
+     ...wedding.photos.map((p,i)=>h(Motion.button,{
        key:p.src,
        type:'button',
+       className:'personal-gallery-item personal-gallery-item-'+(i+1),
        'aria-label':'View photo '+(i+1),
+       initial:!reduced()?{opacity:0,y:24,scale:0.97}:{opacity:1},
+       whileInView:{opacity:1,y:0,scale:1},
+       viewport:{once:true,amount:0.18},
+       transition:{duration:0.8,delay:(i%2)*0.12,ease:[0.22,1,0.36,1]},
        onClick:e=>{trigger.current=e.currentTarget;setSelected(i)}
      },
-      h('img',{src:p.src,alt:p.alt,loading:'lazy',decoding:'async'})
+      h('img',{src:p.src,alt:p.alt,loading:'lazy',decoding:'async',style:p.pos?{objectPosition:p.pos}:undefined})
      ))
     )
    ),

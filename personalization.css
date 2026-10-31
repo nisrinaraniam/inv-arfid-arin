@@ -12,9 +12,9 @@
 .personal-parents{font:11.5px/1.7 'Helvetica Neue',Arial,sans-serif;max-width:280px;margin:12px auto 0;opacity:.85}
 .personal-amp{font:28px 'Cormorant Garamond',serif;opacity:.45}
 .scratch-section{max-width:820px;margin:0 auto}
-.personal-dinner{position:relative;max-width:768px;min-height:1060px;margin:40px auto 0;padding:210px 22% 210px;text-align:center;color:#506579}
+.personal-dinner{position:relative;width:100%;max-width:768px;min-height:980px;margin:0 auto;padding:clamp(140px,22vw,200px) clamp(52px,15vw,160px) clamp(130px,20vw,190px);text-align:center;color:#506579;box-sizing:border-box}
 .personal-curtain{position:absolute;inset:0;pointer-events:none;border-style:solid;border-color:transparent;border-width:570px 0 300px;border-image-source:url('/__l5e/assets-v1/d1983d34-838c-4add-9f18-5f584acd2588/timeline-curtain-tall.png');border-image-slice:55% 0 30% fill;border-image-repeat:stretch}
-.personal-dinner-content{position:relative}
+.personal-dinner-content{position:relative;z-index:1;width:100%;max-width:420px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
 .personal-dinner h2, .personal-dinner-title{font-family:'Allura',cursive !important;font-size:clamp(46px,6.8vw,58px) !important;line-height:1.05 !important;color:var(--earth-cognac);font-weight:400;margin:8px 0 20px}
 .personal-dinner .personal-eyebrow{font-size:8.5px;letter-spacing:.18em}
 .personal-event-date{display:flex;flex-direction:column;font:16px/1.25 'Cormorant Garamond',serif}
@@ -47,7 +47,7 @@
   .personal-venue-content .pearl-button span{padding:7px 14px;font-size:8px}
 }
 .personal-gallery{padding:30px 24px 100px;text-align:center;color:#506579;max-width:1040px;margin:auto}.personal-gallery .personal-heading{margin-bottom:40px}
-.personal-gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.personal-gallery-grid button{overflow:hidden;border-radius:180px 180px 6px 6px;cursor:zoom-in;background:#dfd6c7}.personal-gallery-grid button:nth-child(n+3){border-radius:6px 6px 180px 180px}.personal-gallery-grid img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;transition:transform .8s}.personal-gallery-grid button:hover img{transform:scale(1.025)}
+.personal-gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.8vw,24px);max-width:680px;margin:0 auto}.personal-gallery-grid button{position:relative;overflow:hidden;border-radius:180px 180px 10px 10px;cursor:zoom-in;background:#dfd6c7;box-shadow:0 14px 32px rgba(24,14,8,0.26);transition:transform .45s cubic-bezier(.22,1,.36,1),outline-color .35s ease,box-shadow .45s ease}.personal-gallery-grid button:nth-child(3),.personal-gallery-grid button:nth-child(4){border-radius:12px}.personal-gallery-grid button:nth-child(n+5){border-radius:10px 10px 180px 180px}.personal-gallery-grid img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;transition:transform .85s cubic-bezier(.22,1,.36,1)}.personal-gallery-grid button:hover{outline-color:rgba(235,223,199,0.72)}.personal-gallery-grid button:hover img{transform:scale(1.035)}
 .personal-lightbox{background:#f6f1e9;border:0;padding:25px;max-width:96vw;max-height:95dvh;color:#506579}.personal-lightbox::backdrop{background:#18232fe6;backdrop-filter:blur(7px)}.personal-lightbox>img{max-width:85vw;max-height:76dvh;object-fit:contain}.lightbox-close{position:absolute;right:9px;top:0;font-size:30px;line-height:1;padding:8px;background:#f6f1e9cc;cursor:pointer}.lightbox-controls{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font:13px Jost,sans-serif;gap:40px}.lightbox-controls button{font-size:25px;padding:0 15px;cursor:pointer}
 .local-monogram{position:absolute;left:0;top:0;width:420px;height:480px;transform-origin:0 0;pointer-events:none;z-index:4;will-change:transform}
 /* Never expose the original footage before its personalized seal is decoded. */
@@ -67,7 +67,7 @@
 
 
 /* Love Story Timeline Section with Drapery Background */
-.personal-story{position:relative;max-width:768px;min-height:850px;margin:40px auto 35px;padding:110px 12% 90px;text-align:center;color:#4d4930}
+.personal-story{position:relative;width:100%;max-width:768px;min-height:850px;margin:0 auto;padding:clamp(85px,11vw,115px) clamp(24px,7vw,76px) clamp(70px,9vw,95px);text-align:center;color:#4d4930;box-sizing:border-box}
 .personal-story-curtain{position:absolute;inset:0;pointer-events:none;background:url('/assets/transport-nacre-bg.png') no-repeat center center / cover;z-index:0;border-radius:16px;overflow:hidden;box-shadow:0 12px 36px rgba(50,55,30,0.12)}
 .personal-story-curtain::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.22);pointer-events:none}
 .personal-story-bouquet-top, .personal-story-header, .personal-story-timeline{position:relative;z-index:1}
@@ -253,7 +253,7 @@
   max-width:640px;
   min-height:880px;
   margin:50px auto 40px;
-  padding:230px 16% 140px !important;
+  padding:clamp(180px,22vw,230px) clamp(32px,9vw,96px) clamp(95px,14vw,140px) !important;
   text-align:center;
   color:var(--earth-olive);
   display:flex;
@@ -746,5 +746,120 @@
     margin-left: 0 !important;
     margin-top: 10px !important;
     font-size: 16px !important;
+  }
+}
+
+
+/* RSVP Attendance Buttons */
+.rsvp-attend-group {
+  margin: 22px 0 16px;
+  text-align: center;
+}
+.rsvp-plusone-group {
+  margin: 18px 0 16px;
+  text-align: center;
+}
+.rsvp-attend-selector {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 14px;
+  max-width: 440px;
+  margin: 10px auto 0;
+}
+.rsvp-attend-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 13px 18px;
+  background: rgba(235, 223, 199, 0.08);
+  border: 1.5px solid rgba(235, 223, 199, 0.32);
+  border-radius: 12px;
+  color: var(--earth-cream);
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  text-align: left;
+}
+.rsvp-attend-btn:hover {
+  background: rgba(235, 223, 199, 0.16);
+  border-color: rgba(235, 223, 199, 0.55);
+  transform: translateY(-2px);
+}
+.rsvp-attend-btn.is-selected {
+  background: var(--earth-cream) !important;
+  border-color: var(--earth-cream) !important;
+  color: var(--earth-olive) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(235, 223, 199, 0.5);
+  transform: translateY(-2px);
+}
+.rsvp-attend-btn .rsvp-attend-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+.rsvp-attend-btn.is-selected .rsvp-attend-icon {
+  background: var(--earth-olive);
+  border-color: var(--earth-olive);
+  color: var(--earth-cream);
+}
+.rsvp-attend-text {
+  display: flex;
+  flex-direction: column;
+}
+.rsvp-attend-text strong {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+.rsvp-attend-text small {
+  font-family: Jost, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.82;
+  margin-top: 2px;
+}
+.rsvp-attend-subbtn {
+  padding: 10px 14px;
+}
+.rsvp-attend-subbtn strong {
+  font-size: 16px;
+}
+.rsvp-attend-subbtn small {
+  font-size: 9px;
+}
+@media (max-width: 480px) {
+  .rsvp-attend-selector {
+    gap: 8px;
+  }
+  .rsvp-attend-btn {
+    padding: 11px 12px;
+    gap: 8px;
+  }
+  .rsvp-attend-btn .rsvp-attend-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+  .rsvp-attend-text strong {
+    font-size: 16px;
+  }
+  .rsvp-attend-text small {
+    font-size: 8.5px;
   }
 }
