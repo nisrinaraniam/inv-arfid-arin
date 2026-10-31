@@ -1,7 +1,6 @@
 export const wedding={
   // Google Apps Script Web App URL untuk integrasi Spreadsheet Database
-  // Ganti URL di bawah ini dengan URL hasil Deploy Google Apps Script Anda:
-  gasEndpoint:'https://script.google.com/macros/s/GANTI_DENGAN_ID_DEPLOYMENT_ANDA/exec',
+  gasEndpoint:'https://script.google.com/macros/s/AKfycbw-GkjU5zsMLjDF7zZG3H5UGYY9aWUqrzFSHJRyKAKqpQ2gtJNJC5nSGOYW1gxvCSUpkw/exec',
   groom:{nickname:'Arfid',name:'Arfid Gamal S.T',parents:'First son of Mr. Capt. H. Gamluddin, M.Mar. & Mrs. Hj. Ida Faridah, S.H.I.'},
   bride:{nickname:'Arin',name:'dr. Vanetka Daarin Haya',parents:'First daughter of the late Mr. H. Irpan, S.Sos., M.M. & Mrs. Hj. Henny Arifianti, S.Sos.'},
   date:'2026-12-05',start:'2026-12-05T19:00:00+08:00',dateLabel:'Saturday, 5 December 2026',timeLabel:'7:00 PM WITA',

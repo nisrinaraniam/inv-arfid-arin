@@ -32,11 +32,15 @@ const SHEET_NAME = "Daftar Tamu";
  * Menu otomatis saat Spreadsheet dibuka
  */
 function onOpen() {
-  const ui = SpreadsheetApp.getUi();
-  ui.createMenu("👰 Undangan Arfid & Arin")
-    .addItem("🛠️ 1. Buat Format Sheet Otomatis", "setupSheet")
-    .addItem("✨ 2. Generate UID & Link Undangan Tamu", "generateUIDAndLinks")
-    .addToUi();
+  try {
+    const ui = SpreadsheetApp.getUi();
+    if (ui) {
+      ui.createMenu("👰 Undangan Arfid & Arin")
+        .addItem("🛠️ 1. Buat Format Sheet Otomatis", "setupSheet")
+        .addItem("✨ 2. Generate UID & Link Undangan Tamu", "generateUIDAndLinks")
+        .addToUi();
+    }
+  } catch (e) {}
 }
 
 /**
@@ -46,7 +50,13 @@ function setupSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
+    const sheets = ss.getSheets();
+    if (sheets.length > 0 && sheets[0].getLastRow() === 0 && sheets[0].getName().toLowerCase().includes("sheet")) {
+      sheets[0].setName(SHEET_NAME);
+      sheet = sheets[0];
+    } else {
+      sheet = ss.insertSheet(SHEET_NAME);
+    }
   }
 
   const headers = [
@@ -69,7 +79,10 @@ function setupSheet() {
     .setFontColor("#ebdfc7");
   sheet.setFrozenRows(1);
 
-  SpreadsheetApp.getUi().alert("Format Sheet 'Daftar Tamu' berhasil dibuat!");
+  try {
+    const ui = SpreadsheetApp.getUi();
+    if (ui) ui.alert("Format Sheet 'Daftar Tamu' berhasil dibuat!");
+  } catch (e) {}
 }
 
 /**
