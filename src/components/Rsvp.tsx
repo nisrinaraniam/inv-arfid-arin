@@ -147,7 +147,7 @@ export const Rsvp: React.FC = () => {
                 {urlGuest && (
                   <div className="rsvp-guest-tag mt-3 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-background/25 bg-background/10">
                     <span className="text-[10px] tracking-[0.2em] uppercase text-background/70">
-                      Kepada Yth:
+                      Dear:
                     </span>
                     <span className="font-display text-[16px] font-medium text-background">
                       {urlGuest}
@@ -230,15 +230,15 @@ export const Rsvp: React.FC = () => {
                       />
                     </div>
 
-                    {/* Tombol Konfirmasi Kehadiran ("Hadir" / "Tidak Hadir") */}
+                    {/* Attendance Confirmation ("Joyfully Attending" / "Regretfully Decline") */}
                     <div className="rsvp-attend-group">
                       <label className="text-background font-sans text-[11px] tracking-[0.25em] uppercase block mb-3 text-center">
-                        Konfirmasi Kehadiran / Will You Attend?
+                        Will You Attend?
                       </label>
                       <div
                         className="rsvp-attend-selector flex items-center justify-center gap-3 sm:gap-4"
                         role="radiogroup"
-                        aria-label="Konfirmasi Kehadiran"
+                        aria-label="Will You Attend?"
                       >
                         <button
                           type="button"
@@ -251,8 +251,8 @@ export const Rsvp: React.FC = () => {
                             {attendance === 'yes' ? '✓' : '○'}
                           </span>
                           <span className="rsvp-attend-text">
-                            <strong>Hadir</strong>
-                            <small>Joyfully Accept</small>
+                            <strong>Joyfully Attending</strong>
+                            <small>Accept with Pleasure</small>
                           </span>
                         </button>
                         <button
@@ -266,19 +266,19 @@ export const Rsvp: React.FC = () => {
                             {attendance === 'no' ? '✕' : '○'}
                           </span>
                           <span className="rsvp-attend-text">
-                            <strong>Tidak Hadir</strong>
-                            <small>Regretfully Decline</small>
+                            <strong>Regretfully Decline</strong>
+                            <small>Unable to Attend</small>
                           </span>
                         </button>
                       </div>
                     </div>
 
-                    {/* Jika Hadir: Plus-One & Children */}
+                    {/* Plus-One & Children */}
                     {attendance === 'yes' && (
                       <React.Fragment>
                         <div className="rsvp-plusone-group mt-6">
                           <label className="text-background font-sans text-[11px] tracking-[0.25em] uppercase block mb-3 text-center">
-                            Membawa Tamu Tambahan? / Guest
+                            Will you bring a guest?
                           </label>
                           <div className="rsvp-attend-selector flex items-center justify-center gap-3 sm:gap-4">
                             <button
@@ -294,8 +294,8 @@ export const Rsvp: React.FC = () => {
                                 {hasGuest === 'yes' ? '✓' : '○'}
                               </span>
                               <span className="rsvp-attend-text">
-                                <strong>Bawa Pasangan / Tamu</strong>
-                                <small>Yes, with a guest</small>
+                                <strong>With a Guest</strong>
+                                <small>Plus One (+1)</small>
                               </span>
                             </button>
                             <button
@@ -311,8 +311,8 @@ export const Rsvp: React.FC = () => {
                                 {hasGuest === 'no' ? '✓' : '○'}
                               </span>
                               <span className="rsvp-attend-text">
-                                <strong>Hadir Sendiri</strong>
-                                <small>Attending alone</small>
+                                <strong>Attending Alone</strong>
+                                <small>Just myself</small>
                               </span>
                             </button>
                           </div>
