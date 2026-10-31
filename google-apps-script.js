@@ -24,7 +24,7 @@
  */
 
 // Ganti dengan URL domain website undangan Anda (misal Vercel / GitHub Pages / custom domain)
-const BASE_URL_UNDANGAN = "https://nisrinaraniam.github.io/inv-arfid-arin";
+const BASE_URL_UNDANGAN = "https://arfid-arin.vercel.app";
 
 const SHEET_NAME = "Daftar Tamu";
 
