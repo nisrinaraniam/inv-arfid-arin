@@ -749,7 +749,6 @@
   }
 }
 
-
 /* RSVP Attendance Buttons */
 .rsvp-attend-group {
   margin: 22px 0 16px;
@@ -764,10 +763,10 @@
   align-items: stretch;
   justify-content: center;
   gap: 14px;
-  max-width: 440px;
+  max-width: 460px;
   margin: 10px auto 0;
 }
-.rsvp-attend-btn {
+#rsvp .rsvp-attend-btn {
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -775,29 +774,28 @@
   justify-content: center;
   gap: 12px;
   padding: 13px 18px;
-  background: rgba(235, 223, 199, 0.08);
-  border: 1.5px solid rgba(235, 223, 199, 0.32);
+  background: rgba(235, 223, 199, 0.08) !important;
+  border: 1.5px solid rgba(235, 223, 199, 0.32) !important;
   border-radius: 12px;
-  color: var(--earth-cream);
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   text-align: left;
 }
-.rsvp-attend-btn:hover {
-  background: rgba(235, 223, 199, 0.16);
-  border-color: rgba(235, 223, 199, 0.55);
+#rsvp .rsvp-attend-btn:hover {
+  background: rgba(235, 223, 199, 0.16) !important;
+  border-color: rgba(235, 223, 199, 0.6) !important;
   transform: translateY(-2px);
 }
-.rsvp-attend-btn.is-selected {
-  background: var(--earth-cream) !important;
-  border-color: var(--earth-cream) !important;
-  color: var(--earth-olive) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(235, 223, 199, 0.5);
-  transform: translateY(-2px);
+#rsvp .rsvp-attend-btn:not(.is-selected),
+#rsvp .rsvp-attend-btn:not(.is-selected) *,
+#rsvp .rsvp-attend-btn:not(.is-selected) span,
+#rsvp .rsvp-attend-btn:not(.is-selected) strong,
+#rsvp .rsvp-attend-btn:not(.is-selected) small {
+  color: rgba(235, 223, 199, 0.88) !important;
 }
-.rsvp-attend-btn .rsvp-attend-icon {
+#rsvp .rsvp-attend-btn .rsvp-attend-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -810,11 +808,34 @@
   flex-shrink: 0;
   transition: all 0.25s ease;
 }
-.rsvp-attend-btn.is-selected .rsvp-attend-icon {
-  background: var(--earth-olive);
-  border-color: var(--earth-olive);
-  color: var(--earth-cream);
+
+/* STATE TERPILIH (IS-SELECTED): Teks Hijau Botani yang Sangat Tajam & Terbaca Jelas */
+#rsvp .rsvp-attend-btn.is-selected {
+  background: #f7f2ea !important;
+  border: 2px solid #3c5929 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28), 0 0 0 1px #3c5929 !important;
+  transform: translateY(-2px);
 }
+#rsvp .rsvp-attend-btn.is-selected,
+#rsvp .rsvp-attend-btn.is-selected *,
+#rsvp .rsvp-attend-btn.is-selected span,
+#rsvp .rsvp-attend-btn.is-selected strong,
+#rsvp .rsvp-attend-btn.is-selected small {
+  color: #243d1a !important; /* Hijau botani gelap yang kaya dan sangat kontras di atas cream */
+}
+#rsvp .rsvp-attend-btn.is-selected strong {
+  color: #1e3615 !important;
+}
+#rsvp .rsvp-attend-btn.is-selected small {
+  color: #3b5a28 !important;
+}
+#rsvp .rsvp-attend-btn.is-selected .rsvp-attend-icon {
+  background: #2a471c !important;
+  border-color: #2a471c !important;
+  color: #ffffff !important; /* Centang putih di dalam lingkaran hijau */
+  box-shadow: 0 2px 6px rgba(36, 61, 26, 0.35);
+}
+
 .rsvp-attend-text {
   display: flex;
   flex-direction: column;
@@ -822,7 +843,7 @@
 .rsvp-attend-text strong {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.15;
 }
@@ -831,11 +852,10 @@
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.82;
   margin-top: 2px;
 }
 .rsvp-attend-subbtn {
-  padding: 10px 14px;
+  padding: 10px 14px !important;
 }
 .rsvp-attend-subbtn strong {
   font-size: 16px;
@@ -847,11 +867,11 @@
   .rsvp-attend-selector {
     gap: 8px;
   }
-  .rsvp-attend-btn {
-    padding: 11px 12px;
+  #rsvp .rsvp-attend-btn {
+    padding: 11px 12px !important;
     gap: 8px;
   }
-  .rsvp-attend-btn .rsvp-attend-icon {
+  #rsvp .rsvp-attend-btn .rsvp-attend-icon {
     width: 22px;
     height: 22px;
     font-size: 11px;
