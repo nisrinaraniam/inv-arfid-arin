@@ -1,1 +1,11 @@
-{"name":"mother-of-pearl-local","private":true,"version":"1.0.0","scripts":{"start":"node server.mjs"},"description":"Local reproduction of the Mother of Pearl wedding invitation"}
+{
+  "name": "mother-of-pearl-local",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "build": "node -e \"console.log('Static assets ready')\""
+  },
+  "description": "Arfid & Arin wedding invitation"
+}
