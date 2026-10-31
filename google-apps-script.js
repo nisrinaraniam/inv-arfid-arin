@@ -119,34 +119,58 @@ function generateUIDAndLinks() {
         sheet.getRange(i + 2, 1).setValue(uid);
       }
 
-      // Buat Link Undangan personal
-      const guestEncoded = encodeURIComponent(String(name).trim());
-      link = BASE_URL_UNDANGAN + "/?to=" + guestEncoded + "&uid=" + uid;
+      // Buat Link Undangan personal pendek
+      link = BASE_URL_UNDANGAN + "/" + uid;
       sheet.getRange(i + 2, 5).setValue(link);
       updatedCount++;
     }
   }
 
-  SpreadsheetApp.getUi().alert("Berhasil membuat UID dan Link Undangan untuk " + updatedCount + " tamu!");
+  try {
+    const ui = SpreadsheetApp.getUi();
+    if (ui) ui.alert("Berhasil membuat UID dan Link Undangan untuk " + updatedCount + " tamu!");
+  } catch (e) {}
 }
 
 /**
- * Handle API GET: Mengembalikan daftar ucapan (Live Wishes)
+ * Handle API GET:
+ * 1. Jika ada parameter ?uid=... : Mengembalikan data nama tamu untuk link pendek (misal /PUB-62787)
+ * 2. Jika tanpa parameter : Mengembalikan daftar ucapan (Live Wishes)
  */
 function doGet(e) {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     let sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) {
-      return jsonResponse([]);
+      return jsonResponse(e && e.parameter && e.parameter.uid ? { status: "not_found", found: false } : []);
     }
 
     const lastRow = sheet.getLastRow();
     if (lastRow < 2) {
-      return jsonResponse([]);
+      return jsonResponse(e && e.parameter && e.parameter.uid ? { status: "not_found", found: false } : []);
     }
 
-    // Ambil kolom: Nama (B=2), Status Kehadiran (F=6), Ucapan (I=9), Waktu Konfirmasi (J=10)
+    // 1. Endpoint lookup data tamu berdasarkan UID (untuk link https://arfid-arin.vercel.app/PUB-62787)
+    if (e && e.parameter && e.parameter.uid) {
+      const targetUid = String(e.parameter.uid).trim();
+      const data = sheet.getRange(2, 1, lastRow - 1, 10).getValues();
+      for (let i = 0; i < data.length; i++) {
+        const rowUid = String(data[i][0]).trim();
+        if (rowUid.toLowerCase() === targetUid.toLowerCase()) {
+          return jsonResponse({
+            status: "success",
+            found: true,
+            uid: rowUid,
+            name: String(data[i][1] || "").trim(),
+            origin: String(data[i][2] || "").trim(),
+            attendance: String(data[i][5] || "").trim() === "Hadir" || String(data[i][5] || "").trim() === "attending" ? "attending" : (data[i][5] ? "not_attending" : "")
+          });
+        }
+      }
+      return jsonResponse({ status: "success", found: false, uid: targetUid });
+    }
+
+    // 2. Endpoint Live Wishes (daftar ucapan)
     const values = sheet.getRange(2, 1, lastRow - 1, 10).getValues();
     const wishes = [];
 
@@ -230,8 +254,7 @@ function doPost(e) {
     } else {
       // Mode Publik: Tambahkan baris baru
       const newUid = uid || ("PUB-" + Math.floor(10000 + Math.random() * 90000));
-      const guestEncoded = encodeURIComponent(name);
-      const link = BASE_URL_UNDANGAN + "/?to=" + guestEncoded + "&uid=" + newUid;
+      const link = BASE_URL_UNDANGAN + "/" + newUid;
 
       sheet.appendRow([
         newUid,

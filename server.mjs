@@ -10,11 +10,21 @@ http.createServer(async(req,res)=>{
  try{
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);res.end();return;}
   const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-  const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
-  if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
-  let info;try{info=await stat(file)}catch{res.writeHead(404);res.end('Not found');return}
-  if(!info.isFile()){res.writeHead(404);res.end();return;}
-  const headers={'Content-Type':mime[path.extname(file)]||'application/octet-stream','Accept-Ranges':'bytes','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff'};
+  let targetFile=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
+  if(!targetFile.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
+  let info;
+  try{
+    info=await stat(targetFile);
+    if(!info.isFile()) throw new Error('Not a file');
+  }catch{
+    if(!path.extname(pathname)){
+      targetFile=path.resolve(root,'index.html');
+      try{info=await stat(targetFile)}catch{res.writeHead(404);res.end('Not found');return;}
+    }else{
+      res.writeHead(404);res.end('Not found');return;
+    }
+  }
+  const headers={'Content-Type':mime[path.extname(targetFile)]||'application/octet-stream','Accept-Ranges':'bytes','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff'};
   const range=req.headers.range;
   if(range){
    const match=/^bytes=(\d*)-(\d*)$/.exec(range);
@@ -22,11 +32,10 @@ http.createServer(async(req,res)=>{
    if(match){if(match[1]){start=Number(match[1]);if(match[2])end=Math.min(Number(match[2]),end)}else if(match[2])start=Math.max(0,info.size-Number(match[2]));}
    if(!match||start>end||start>=info.size){res.writeHead(416,{'Content-Range':`bytes */${info.size}`});res.end();return;}
    res.writeHead(206,{...headers,'Content-Range':`bytes ${start}-${end}/${info.size}`,'Content-Length':end-start+1});
-   if(req.method==='HEAD')res.end();else createReadStream(file,{start,end}).pipe(res);
+   if(req.method==='HEAD')res.end();else createReadStream(targetFile,{start,end}).pipe(res);
   }else{
    res.writeHead(200,{...headers,'Content-Length':info.size});
-   if(req.method==='HEAD')res.end();else createReadStream(file).pipe(res);
+   if(req.method==='HEAD')res.end();else createReadStream(targetFile).pipe(res);
   }
  }catch{res.writeHead(500);res.end('Unable to read file');}
 }).listen(port,'127.0.0.1',()=>console.log(`Local: http://localhost:${port}`));
-
