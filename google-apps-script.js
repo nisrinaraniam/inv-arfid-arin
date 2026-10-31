@@ -1,29 +1,61 @@
 /**
  * GOOGLE APPS SCRIPT DATABASE - UNDANGAN DIGITAL ARFID & ARIN
  * -------------------------------------------------------------
- * Script ini mengelola:
- * 1. Mode Publik: Tamu mengisi nama sendiri di website (otomatis tambah baris baru).
- * 2. Mode UID: Tamu membuka link khusus dengan /PUB-62787 atau ?uid=UID (otomatis update status baris tamu terkait).
- * 3. Menu Spreadsheet Otomatis: Generate UID & Link Undangan siap kirim WhatsApp.
- * 4. API GET:
- *    - Jika parameter ?uid=... : Lookup data tamu untuk personalisasi ("Dear: Nama Tamu").
- *    - Jika tanpa parameter : Menampilkan daftar Live Wishes secara real-time di website.
- * 5. API POST: Menerima konfirmasi kehadiran & ucapan tanpa terkena blokir CORS.
+ * Fitur:
+ * 1. Mode Personal Link:
+ *    - Link berformat: https://arfid-arin.vercel.app/?to=Nama+Tamu&uid=RandomCode
+ *    - Nama tamu langsung tampil seketika di cover & form RSVP tanpa loading/delay.
+ *    - Saat tamu submit RSVP, otomatis mengupdate baris tamu terkait di spreadsheet.
+ * 2. Mode Publik: Tamu yang membuka link umum otomatis dibuatkan baris baru.
+ * 3. UID Acak: Kombinasi huruf besar, huruf kecil, angka, dan simbol (misal: "8k_m9-Xz", "W2_x!7*Q").
+ * 4. Perhitungan Pax Akurat:
+ *    - Tidak Hadir: 0 pax
+ *    - Hadir Sendiri: 1 pax
+ *    - Hadir Berdua (+ pasangan): 2 pax
+ *    - Hadir Bertiga (+ pasangan + anak): 3 pax
+ *    - Hadir Berdua (+ anak): 2 pax
+ * 5. Deteksi Kolom Otomatis:
+ *    - Menjamin Pax, Ucapan, dan Status masuk ke kolom yang tepat 100%.
  *
- * CARA PEMASANGAN:
- * 1. Buka Google Spreadsheet di Google Drive Anda.
+ * CARA PEMASANGAN / UPDATE:
+ * 1. Buka Google Spreadsheet undangan Anda di Google Drive.
  * 2. Klik menu 'Extensions' (Ekstensi) -> 'Apps Script'.
- * 3. Hapus semua kode default, lalu tempelkan (paste) seluruh kode ini.
- * 4. Klik tombol 'Save' (ikon disket / Ctrl + S).
- * 5. Klik 'Deploy' (Terapkan) -> 'Manage deployments' (Kelola penerapan).
- * 6. Klik ikon pensil (Edit) -> Version: 'New version' -> klik 'Deploy'.
+ * 3. Hapus semua kode default (Ctrl + A lalu Delete).
+ * 4. Tempelkan (paste) seluruh kode ini (Ctrl + V).
+ * 5. Klik tombol 'Save' (ikon disket / Ctrl + S).
+ * 6. Klik 'Deploy' (Terapkan) -> 'Manage deployments' (Kelola penerapan).
+ * 7. Klik ikon pensil (Edit) -> Version: 'New version' -> klik 'Deploy'.
  */
 
-// ================= PENGATURAN DASAR =================
 // URL website undangan di Vercel (tanpa garis miring di akhir)
 const BASE_URL_UNDANGAN = "https://arfid-arin.vercel.app";
 
 const SHEET_NAME = "Daftar Tamu";
+
+/**
+ * Generator UID acak: kombinasi huruf besar/kecil, angka, dan simbol aman
+ * Contoh hasil: "8k_m9-Xz", "W2_x!7*Q", "3a$DZ*_G"
+ */
+function generateRandomUID(length) {
+  length = length || 8;
+  const letters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
+  const numbers = "23456789";
+  const symbols = "_-$!@~*";
+  const allChars = letters + numbers + symbols;
+
+  let result = "";
+  // Pastikan ada unsur huruf, angka, dan simbol
+  result += letters.charAt(Math.floor(Math.random() * letters.length));
+  result += numbers.charAt(Math.floor(Math.random() * numbers.length));
+  result += symbols.charAt(Math.floor(Math.random() * symbols.length));
+
+  for (let i = 3; i < length; i++) {
+    result += allChars.charAt(Math.floor(Math.random() * allChars.length));
+  }
+
+  // Acak susunan karakter
+  return result.split("").sort(() => 0.5 - Math.random()).join("");
+}
 
 /**
  * Menu otomatis saat Spreadsheet dibuka
@@ -41,7 +73,7 @@ function onOpen() {
 }
 
 /**
- * Fungsi 1: Menyiapkan struktur sheet database tamu otomatis (tanpa kolom pantangan makanan)
+ * Fungsi 1: Menyiapkan struktur sheet database tamu otomatis (9 kolom tanpa pantangan makanan)
  */
 function setupSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -56,7 +88,6 @@ function setupSheet() {
     }
   }
 
-  // 9 Kolom Standar (Kolom Pantangan Makanan dihapus)
   const headers = [
     "UID",
     "Nama Tamu",
@@ -83,7 +114,7 @@ function setupSheet() {
 }
 
 /**
- * Fungsi 2: Generate UID unik dan Link Undangan personal pendek untuk setiap tamu
+ * Fungsi 2: Generate UID acak (huruf-angka-simbol) dan Link Undangan personal dengan ?to=Nama&uid=UID
  */
 function generateUIDAndLinks() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -114,35 +145,80 @@ function generateUIDAndLinks() {
     // Lewati baris kosong
     if (!name) continue;
 
-    // Jika UID atau Link belum ada, buatkan otomatis
-    if (!uid || !link) {
-      if (!uid) {
-        // Format UID ramah URL: AA-nama-4digit
-        const cleanName = name
-          .toLowerCase()
-          .replace(/[^a-z0-9]/g, "")
-          .substring(0, 8);
-        const randomCode = Math.floor(1000 + Math.random() * 9000);
-        uid = "AA-" + (cleanName || "tamu") + "-" + randomCode;
-        sheet.getRange(i + 2, 1).setValue(uid);
-      }
-
-      // Buat Link Undangan personal pendek (misal: https://arfid-arin.vercel.app/AA-budi-1234)
-      link = BASE_URL_UNDANGAN + "/" + uid;
-      sheet.getRange(i + 2, 5).setValue(link);
-      updatedCount++;
+    // Jika UID belum ada, buatkan UID acak huruf-angka-simbol
+    if (!uid) {
+      uid = generateRandomUID(8);
+      sheet.getRange(i + 2, 1).setValue(uid);
     }
+
+    // Format Link: https://arfid-arin.vercel.app/?to=Nama+Tamu&uid=UID
+    const guestEncoded = encodeURIComponent(name);
+    const uidEncoded = encodeURIComponent(uid);
+    link = BASE_URL_UNDANGAN + "/?to=" + guestEncoded + "&uid=" + uidEncoded;
+    sheet.getRange(i + 2, 5).setValue(link);
+    updatedCount++;
   }
 
   try {
     const ui = SpreadsheetApp.getUi();
-    if (ui) ui.alert("Berhasil membuat UID dan Link Undangan untuk " + updatedCount + " tamu!");
+    if (ui) ui.alert("Berhasil membuat UID dan Link Undangan personal untuk " + updatedCount + " tamu!");
   } catch (e) {}
 }
 
 /**
+ * Helper: Mencari letak index kolom secara tepat dari header baris ke-1
+ */
+function getColumnMapping(sheet) {
+  const lastCol = Math.max(sheet.getLastColumn(), 10);
+  const headerRow = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+
+  let colStatus = 6;  // Default F
+  let colPax = 7;     // Default G
+  let colMessage = -1;
+  let colTime = -1;
+  let colDietary = -1;
+
+  for (let c = 0; c < headerRow.length; c++) {
+    const title = String(headerRow[c] || "").toLowerCase().trim();
+    if (title.includes("status") || title.includes("kehadiran")) {
+      colStatus = c + 1;
+    } else if (title.includes("pax") || title.includes("jumlah")) {
+      colPax = c + 1;
+    } else if (title.includes("pantangan") || title.includes("diet")) {
+      colDietary = c + 1;
+    } else if (title.includes("ucapan") || title.includes("doa") || title.includes("pesan") || title.includes("wishes") || title.includes("message")) {
+      colMessage = c + 1;
+    } else if (title.includes("waktu") || title.includes("konfirmasi") || title.includes("tanggal") || title.includes("time") || title.includes("date")) {
+      colTime = c + 1;
+    }
+  }
+
+  // Jika kolom ucapan belum ketemu dari keyword:
+  if (colMessage === -1) {
+    if (colDietary > 0) {
+      colMessage = colDietary + 1; // Jika ada pantangan di col 8, ucapan di col 9
+    } else {
+      colMessage = 8; // Default H
+    }
+  }
+
+  if (colTime === -1) {
+    colTime = colMessage + 1;
+  }
+
+  return {
+    status: colStatus,
+    pax: colPax,
+    dietary: colDietary,
+    message: colMessage,
+    time: colTime,
+    totalCols: lastCol
+  };
+}
+
+/**
  * Handle API GET:
- * 1. Jika ada parameter ?uid=... : Mengembalikan data nama tamu untuk link pendek (misal /PUB-62787)
+ * 1. Jika ada parameter ?uid=... : Mengembalikan data tamu untuk lookup
  * 2. Jika tanpa parameter : Mengembalikan daftar ucapan (Live Wishes)
  */
 function doGet(e) {
@@ -158,15 +234,16 @@ function doGet(e) {
       return jsonResponse(e && e.parameter && e.parameter.uid ? { status: "not_found", found: false } : []);
     }
 
-    // 1. Endpoint lookup data tamu berdasarkan UID (untuk link https://arfid-arin.vercel.app/PUB-62787)
+    const mapping = getColumnMapping(sheet);
+    const data = sheet.getRange(2, 1, lastRow - 1, mapping.totalCols).getValues();
+
+    // 1. Endpoint lookup data tamu berdasarkan UID
     if (e && e.parameter && e.parameter.uid) {
       const targetUid = String(e.parameter.uid).trim();
-      const numCols = Math.max(sheet.getLastColumn(), 9);
-      const data = sheet.getRange(2, 1, lastRow - 1, numCols).getValues();
       for (let i = 0; i < data.length; i++) {
         const rowUid = String(data[i][0]).trim();
         if (rowUid.toLowerCase() === targetUid.toLowerCase()) {
-          const attendanceVal = String(data[i][5] || "").trim();
+          const attendanceVal = String(data[i][mapping.status - 1] || "").trim();
           return jsonResponse({
             status: "success",
             found: true,
@@ -181,28 +258,19 @@ function doGet(e) {
     }
 
     // 2. Endpoint Live Wishes (daftar ucapan)
-    const numCols = Math.max(sheet.getLastColumn(), 9);
-    const headerRow = sheet.getRange(1, 1, 1, numCols).getValues()[0];
-    let msgColIdx = 7;  // Kolom 8 (index 7)
-    let timeColIdx = 8; // Kolom 9 (index 8)
-
-    for (let c = 0; c < headerRow.length; c++) {
-      const h = String(headerRow[c] || "").toLowerCase();
-      if (h.includes("ucapan") || h.includes("doa") || h.includes("message")) msgColIdx = c;
-      if (h.includes("waktu") || h.includes("konfirmasi") || h.includes("time")) timeColIdx = c;
-    }
-
-    const values = sheet.getRange(2, 1, lastRow - 1, numCols).getValues();
     const wishes = [];
+    const msgIdx = mapping.message - 1;
+    const timeIdx = mapping.time - 1;
+    const statusIdx = mapping.status - 1;
 
-    // Baca dari baris terbaru ke terlama (maksimal 60 ucapan)
-    for (let i = values.length - 1; i >= 0; i--) {
-      const name = String(values[i][1] || "").trim();
-      const status = String(values[i][5] || "").trim();
-      const message = String(values[i][msgColIdx] || "").trim();
-      const date = values[i][timeColIdx];
+    for (let i = data.length - 1; i >= 0; i--) {
+      const name = String(data[i][1] || "").trim();
+      const status = String(data[i][statusIdx] || "").trim();
+      const message = String(data[i][msgIdx] || "").trim();
+      const date = data[i][timeIdx];
 
-      if (name && message) {
+      // Pastikan bukan angka pax dan bukan pesan kosong
+      if (name && message && isNaN(Number(message))) {
         wishes.push({
           name: name,
           rsvpStatus: status === "Hadir" ? "attending" : "not_attending",
@@ -231,7 +299,7 @@ function doPost(e) {
 
     const payload = JSON.parse(e.postData.contents);
     const name = payload.name ? String(payload.name).trim() : "";
-    const rsvpStatus = payload.rsvpStatus || "attending";
+    const rsvpStatus = payload.rsvpStatus || (payload.attendance === "yes" ? "attending" : "not_attending");
     const origin = payload.origin || "";
     const message = payload.rsvp_message || payload.message || "";
     const uid = payload.uid ? String(payload.uid).trim() : "";
@@ -246,6 +314,7 @@ function doPost(e) {
     // Hadir Sendiri: 1
     // Hadir Berdua (+ pasangan): 2
     // Hadir Bertiga (+ pasangan + anak): 3
+    // Hadir Berdua (+ anak): 2
     const isAttending = rsvpStatus === "attending" || payload.attendance === "yes";
     let pax = 0;
     if (isAttending) {
@@ -263,23 +332,11 @@ function doPost(e) {
     }
 
     const lastRow = sheet.getLastRow();
-    const numCols = Math.max(sheet.getLastColumn(), 9);
-    const headerRow = sheet.getRange(1, 1, 1, numCols).getValues()[0];
-
-    let msgCol = 8;
-    let timeCol = 9;
-    let hasDietaryCol = false;
-
-    for (let c = 0; c < headerRow.length; c++) {
-      const h = String(headerRow[c] || "").toLowerCase();
-      if (h.includes("pantangan") || h.includes("dietary")) hasDietaryCol = true;
-      if (h.includes("ucapan") || h.includes("doa") || h.includes("message")) msgCol = c + 1;
-      if (h.includes("waktu") || h.includes("konfirmasi") || h.includes("time")) timeCol = c + 1;
-    }
+    const mapping = getColumnMapping(sheet);
 
     let rowIndexToUpdate = -1;
 
-    // Jika UID disertakan, cari baris tamu yang sesuai
+    // Prioritas 1: Cari berdasarkan UID (Kolom A)
     if (uid && lastRow >= 2) {
       const uids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
       for (let i = 0; i < uids.length; i++) {
@@ -290,31 +347,45 @@ function doPost(e) {
       }
     }
 
+    // Prioritas 2: Jika UID belum cocok, cari berdasarkan Nama Tamu (Kolom B)
+    if (rowIndexToUpdate === -1 && name && lastRow >= 2) {
+      const names = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+      for (let i = 0; i < names.length; i++) {
+        if (String(names[i][0]).trim().toLowerCase() === name.toLowerCase()) {
+          rowIndexToUpdate = i + 2;
+          break;
+        }
+      }
+    }
+
     const statusLabel = isAttending ? "Hadir" : "Tidak Hadir";
 
     if (rowIndexToUpdate > 0) {
-      // Update data tamu yang sudah terdaftar
-      sheet.getRange(rowIndexToUpdate, 6).setValue(statusLabel); // Status Kehadiran
-      sheet.getRange(rowIndexToUpdate, 7).setValue(pax);         // Pax
-      if (message) sheet.getRange(rowIndexToUpdate, msgCol).setValue(message);
-      sheet.getRange(rowIndexToUpdate, timeCol).setValue(now);  // Waktu Konfirmasi
+      // 1. UPDATE baris tamu yang sudah ada
+      sheet.getRange(rowIndexToUpdate, mapping.status).setValue(statusLabel);
+      sheet.getRange(rowIndexToUpdate, mapping.pax).setValue(pax);
+      sheet.getRange(rowIndexToUpdate, mapping.message).setValue(message);
+      sheet.getRange(rowIndexToUpdate, mapping.time).setValue(now);
     } else {
-      // Mode Publik: Tambahkan baris baru
-      const newUid = uid || ("PUB-" + Math.floor(10000 + Math.random() * 90000));
-      const link = BASE_URL_UNDANGAN + "/" + newUid;
+      // 2. Mode Publik: Tambahkan baris baru sesuai struktur kolom sheet
+      const newUid = uid || generateRandomUID(8);
+      const guestEncoded = encodeURIComponent(name);
+      const uidEncoded = encodeURIComponent(newUid);
+      const link = BASE_URL_UNDANGAN + "/?to=" + guestEncoded + "&uid=" + uidEncoded;
 
-      const newRow = [
-        newUid,
-        name,
-        origin,
-        "",          // Nomor WA
-        link,
-        statusLabel,
-        pax
-      ];
-      if (hasDietaryCol) newRow.push(""); // Jika sheet lama masih ada kolom Pantangan Makanan
-      newRow.push(message);
-      newRow.push(now);
+      const newRow = [];
+      for (let c = 1; c <= mapping.totalCols; c++) {
+        if (c === 1) newRow.push(newUid);
+        else if (c === 2) newRow.push(name);
+        else if (c === 3) newRow.push(origin);
+        else if (c === 4) newRow.push("");
+        else if (c === 5) newRow.push(link);
+        else if (c === mapping.status) newRow.push(statusLabel);
+        else if (c === mapping.pax) newRow.push(pax);
+        else if (c === mapping.message) newRow.push(message);
+        else if (c === mapping.time) newRow.push(now);
+        else newRow.push("");
+      }
 
       sheet.appendRow(newRow);
     }
