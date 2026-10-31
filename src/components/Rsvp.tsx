@@ -15,7 +15,6 @@ export const Rsvp: React.FC = () => {
   const [attendance, setAttendance] = useState<'yes' | 'no'>('yes');
   const [hasGuest, setHasGuest] = useState<'yes' | 'no'>('no');
   const [childrenCount, setChildrenCount] = useState(0);
-  const [dietary, setDietary] = useState<string[]>([]);
   const [message, setMessage] = useState('');
   const [websiteHoneypot, setWebsiteHoneypot] = useState('');
   const [urlUid, setUrlUid] = useState('');
@@ -55,19 +54,6 @@ export const Rsvp: React.FC = () => {
   }, []);
 
   const totalGuests = 1 + (hasGuest === 'yes' ? 1 : 0);
-  const guestLabels =
-    attendance === 'yes'
-      ? [
-          ...Array.from({ length: totalGuests }, (_, i) => `Guest ${i + 1}`),
-          ...Array.from({ length: childrenCount }, (_, i) => `Child ${i + 1}`),
-        ]
-      : [];
-
-  const handleDietaryChange = (index: number, val: string) => {
-    const next = [...dietary];
-    next[index] = val;
-    setDietary(next);
-  };
 
   const handleOpenEnvelope = () => {
     if (!opened) {
@@ -84,10 +70,6 @@ export const Rsvp: React.FC = () => {
     }
 
     setIsPending(true);
-    const dietaryFormatted = guestLabels
-      .map((label, idx) => (dietary[idx]?.trim() ? `${label}: ${dietary[idx].trim()}` : null))
-      .filter(Boolean)
-      .join(' | ');
 
     const entry = {
       full_name: fullName.trim(),
@@ -95,7 +77,6 @@ export const Rsvp: React.FC = () => {
       guest_count: attendance === 'yes' ? totalGuests + childrenCount : 1,
       adult_count: attendance === 'yes' ? totalGuests : 1,
       children_count: attendance === 'yes' ? childrenCount : 0,
-      dietary_requirements: dietaryFormatted || undefined,
       message: message.trim() || undefined,
       uid: urlUid,
       saved_at: new Date().toISOString(),
@@ -119,7 +100,6 @@ export const Rsvp: React.FC = () => {
           rsvpStatus: attendance === 'yes' ? 'attending' : 'not_attending',
           pax: attendance === 'yes' ? totalGuests + childrenCount : 0,
           origin: '',
-          dietary_requirements: dietaryFormatted || '',
           rsvp_message: message.trim() || '',
           uid: urlUid,
         };
@@ -293,7 +273,7 @@ export const Rsvp: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Jika Hadir: Plus-One, Children & Dietary */}
+                    {/* Jika Hadir: Plus-One & Children */}
                     {attendance === 'yes' && (
                       <React.Fragment>
                         <div className="rsvp-plusone-group mt-6">
@@ -338,7 +318,7 @@ export const Rsvp: React.FC = () => {
                           </div>
                         </div>
 
-                        {/* Children Counter */}
+                        {/* Children Counter (Max 1) */}
                         <div>
                           <label className="text-background font-sans text-[11px] tracking-[0.25em] uppercase">
                             Children
@@ -349,47 +329,22 @@ export const Rsvp: React.FC = () => {
                               aria-label="Decrease child count"
                               onClick={() => setChildrenCount((c) => Math.max(0, c - 1))}
                               disabled={childrenCount === 0}
-                              className="w-9 h-9 rounded-full border border-background/40 text-background font-display text-lg leading-none flex items-center justify-center hover:bg-background/5 transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+                              className="w-9 h-9 rounded-full border border-background/40 text-background font-display text-lg leading-none flex items-center justify-center hover:bg-background/5 transition-colors disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
                             >
                               −
                             </button>
-                            <span className="font-display text-[14px] text-background min-w-[110px] text-center">
-                              {childrenCount === 0
-                                ? 'No children'
-                                : `${childrenCount} child${childrenCount > 1 ? 'ren' : ''}`}
+                            <span className="font-display text-[14px] text-background min-w-[110px] text-center select-none">
+                              {childrenCount === 0 ? 'No children' : '1 child'}
                             </span>
                             <button
                               type="button"
                               aria-label="Increase child count"
-                              onClick={() => setChildrenCount((c) => Math.min(4, c + 1))}
-                              disabled={childrenCount === 4}
-                              className="w-9 h-9 rounded-full border border-background/40 text-background font-display text-lg leading-none flex items-center justify-center hover:bg-background/5 transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+                              onClick={() => setChildrenCount((c) => Math.min(1, c + 1))}
+                              disabled={childrenCount >= 1}
+                              className="w-9 h-9 rounded-full border border-background/40 text-background font-display text-lg leading-none flex items-center justify-center hover:bg-background/5 transition-colors disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
                             >
                               +
                             </button>
-                          </div>
-                        </div>
-
-                        {/* Dietary Requirements */}
-                        <div>
-                          <label className="text-background font-sans text-[11px] tracking-[0.25em] uppercase">
-                            Dietary Requirements
-                          </label>
-                          <div className="space-y-3 mt-2 max-w-md mx-auto">
-                            {guestLabels.map((label, idx) => (
-                              <div key={label}>
-                                <span className="text-background/60 font-sans text-[11px] tracking-wide uppercase block text-left">
-                                  {label}
-                                </span>
-                                <input
-                                  type="text"
-                                  value={dietary[idx] ?? ''}
-                                  onChange={(e) => handleDietaryChange(idx, e.target.value)}
-                                  className="mt-1 w-full bg-transparent border-b border-background/25 text-background placeholder:text-background/40 focus:border-background/60 font-display text-center py-1.5 outline-none"
-                                  placeholder="Dietary requirements or allergies"
-                                />
-                              </div>
-                            ))}
                           </div>
                         </div>
                       </React.Fragment>
