@@ -1,0 +1,264 @@
+/* Palette supplied by the couple: olive, sage, cognac, cream, sand, brown. */
+:root{
+ --font-script: 'Allura', cursive;
+ --earth-olive:#4d4930;--earth-sage:#9b9772;--earth-cognac:#6d3914;--earth-cream:#ebdfc7;--earth-sand:#b89f77;--earth-brown:#634120;
+ --background:40 47.368% 85.098%;--foreground:51.724 23.2% 24.51%;--ivory:40 47.368% 85.098%;--sage-dark:51.724 23.2% 24.51%;--gold:36.923 31.401% 59.412%;
+}
+body{background:var(--earth-cream);color:var(--earth-olive)}
+.personal-heading{font-weight:500;letter-spacing:-.025em}
+.personal-eyebrow{color:var(--earth-cognac);font-weight:400}
+.personal-family{color:var(--earth-olive)}
+.personal-family-inner>.personal-couple{max-width:1040px;margin-inline:auto}
+.personal-intro,.personal-parents{font-family:Jost,'Helvetica Neue',sans-serif;font-weight:400;font-size:14px;line-height:1.85;opacity:1}
+.personal-nickname{color:var(--earth-cognac)}.personal-person h3{font-weight:500;color:var(--earth-olive)}.personal-amp{color:var(--earth-cognac);opacity:.8}
+.personal-dinner{color:var(--earth-cognac)}.personal-event-note{font-family:Jost,sans-serif}.personal-rule{background:var(--earth-sage)}
+.pearl-button{color:var(--earth-cognac);border-color:#6d391480}.pearl-button span{border-color:#6d39144d}.pearl-button:hover span{background:var(--earth-cognac);color:var(--earth-cream)}
+/* The Venue: Shell Frame on Cream */
+.personal-location{position:relative;max-width:none;padding:95px 24px 115px;background:var(--earth-cream);color:var(--earth-olive);text-align:center}
+
+/* Gallery: Earth Brown Background */
+.personal-gallery{position:relative;max-width:none;padding:100px 24px 110px;background:var(--earth-brown);color:var(--earth-cream);text-align:center}
+.personal-gallery::before,.personal-gallery::after{content:'';display:block;height:1px;width:76px;background:var(--earth-sand);margin:0 auto 36px;opacity:.7}
+.personal-gallery::after{margin:36px auto 0}
+.personal-gallery .personal-eyebrow{color:var(--earth-cream);opacity:.9}
+.personal-gallery .personal-heading{color:var(--earth-cream)}
+.personal-gallery-grid{gap:18px}
+.personal-gallery-grid button{background:#422a18;outline:1px solid rgba(235,223,199,0.35);outline-offset:5px}
+.personal-lightbox{background:var(--earth-cream);color:var(--earth-olive)}.personal-lightbox::backdrop{background:#272719ed}.lightbox-close{background:#ebdfc7db}
+/* The original image edge is hidden so the RSVP opens cleanly into olive. */
+#rsvp{background:var(--earth-olive);color:var(--earth-cream);margin-top:0;padding-top:34px}
+#rsvp>img{display:none}
+#rsvp h2,#rsvp p,#rsvp label,#rsvp input,#rsvp textarea,#rsvp button,#rsvp span{color:var(--earth-cream)}
+#rsvp>div>div{padding-top:18px}
+#rsvp p{font-family:Jost,sans-serif;font-size:14px;line-height:1.9}
+#rsvp label{font-family:Jost,sans-serif}
+#rsvp input,#rsvp textarea{border-color:#ebdfc766;background:#ebdfc708;font-family:'Cormorant Garamond',serif;font-size:19px}
+#rsvp input::placeholder,#rsvp textarea::placeholder{color:#ebdfc7b3}
+#rsvp input:focus-visible,#rsvp textarea:focus-visible{outline-color:var(--earth-sand);border-color:var(--earth-cream)}
+#rsvp button[type=submit]{border-color:var(--earth-sand)}
+#rsvp button[type=submit]:hover span span{background:var(--earth-cream);color:var(--earth-olive)}
+#rsvp [role=radio]{border-color:#ebdfc780}
+#rsvp-confirmation{background:transparent;color:var(--earth-cream)}
+#rsvp-confirmation h2,#rsvp-confirmation p{color:var(--earth-cream)}
+#rsvp-confirmation button.rsvp-confirm-btn{color:var(--earth-cream);border-color:rgba(235,223,199,0.45);background:rgba(235,223,199,0.06)}
+#rsvp-confirmation button.rsvp-confirm-btn:hover{background:var(--earth-cream);color:var(--earth-olive);border-color:var(--earth-cream)}
+.personal-thankyou{background:var(--earth-sand);color:var(--earth-olive);padding-block:95px 65px}
+.personal-thankyou p{color:var(--earth-olive)}.personal-thankyou p.font-doulaise{color:var(--earth-cognac)}
+.personal-thankyou p.font-doulaise span{color:var(--earth-brown)}
+.personal-thankyou p:last-child{font-family:Jost,sans-serif;color:var(--earth-brown);font-size:13px}
+.personal-thankyou a{color:var(--earth-brown)}
+#countdown img{filter:sepia(.63) saturate(.6)}
+#countdown h2, #countdown p, #countdown span, #countdown div { color: var(--earth-brown) !important; }
+.quote-film{color:var(--earth-cream);background:var(--earth-olive)}
+.quote-film-shade{background:linear-gradient(180deg,#18190e55 0%,#18190e8f 34%,#18190e8f 67%,#22190f75 100%)}
+.quote-film-copy p{color:var(--earth-cream)}
+.local-skip{border-color:#4d493066;color:var(--earth-olive);background:#ebdfc7dd}
+:is([aria-label="Open wedding invitation"], [aria-label="Buka undangan pernikahan"]):not([data-monogram-ready="true"])::before{color:var(--earth-olive);background:var(--earth-cream)}
+:focus-visible{outline-color:var(--earth-cognac)}
+
+/* Overall font scaling: refined, high-end proportions to avoid oversized pop-up look */
+h2.font-doulaise, .font-doulaise.text-6xl, .font-doulaise.text-7xl, .font-doulaise.text-8xl, .font-doulaise.text-5xl {
+  font-size: clamp(34px, 5vw, 46px) !important;
+  line-height: 1.05 !important;
+}
+h2.font-display, .font-display.text-5xl, .font-display.text-7xl {
+  font-size: clamp(28px, 4vw, 38px) !important;
+  line-height: 1.1 !important;
+}
+.font-doulaise.text-3xl, .font-doulaise.text-4xl {
+  font-size: clamp(18px, 2.8vw, 24px) !important;
+}
+.personal-thankyou p.font-doulaise {
+  font-size: clamp(32px, 4.8vw, 44px) !important;
+}
+#rsvp h2 {
+  font-size: clamp(28px, 4vw, 38px) !important;
+}
+p.font-display.text-\[43px\], p.font-display.md\:text-\[67px\] {
+  font-size: clamp(26px, 3.8vw, 36px) !important;
+}
+.countdown-container h2, section div[class*="text-[7vw]"] {
+  font-size: clamp(22px, 3.6vw, 34px) !important;
+}
+section div[class*="text-[8vw]"] {
+  font-size: clamp(24px, 4vw, 38px) !important;
+}
+/* Decorative Script – Allura Calligraphy */
+.font-doulaise, .font-ballet, .font-script, .personal-nickname {
+  font-family: 'Allura', cursive !important;
+  font-weight: 400 !important;
+}
+.font-ballet {
+  font-size: clamp(38px, 5.5vw, 54px) !important;
+  line-height: 1.1 !important;
+}
+.personal-nickname {
+  font-size: clamp(36px, 5vw, 46px) !important;
+  line-height: 1.15 !important;
+}
+
+.personal-dinner h2, .personal-dinner-title { font-family: 'Allura', cursive !important; color: var(--earth-cognac) !important; }
+
+/* Calendar action occupies the former closing greeting position. */
+#countdown .countdown-calendar-slot{position:absolute;left:0;right:0;bottom:7%;display:flex;justify-content:center;z-index:10}
+#countdown .countdown-calendar-slot .pearl-button{margin-top:0;max-width:calc(100% - 32px)}
+#countdown .countdown-calendar-slot .pearl-button>span{display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+#countdown .countdown-calendar-slot svg{flex-shrink:0;margin-right:0}
+@media(max-width:767px){
+  #countdown .countdown-calendar-slot .pearl-button>span{min-height:36px;padding:9px 16px;font-size:9px;letter-spacing:.15em}
+}
+/* Editorial 4:3 B&W Couple Portrait with Top Header & Left/Right Names */
+#mempelai.personal-family {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 4 / 3;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #f8f6f2;
+  color: var(--earth-olive);
+  box-sizing: border-box;
+}
+#mempelai .personal-family-curtain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('/assets/couple/couple-bw-bg.jpg') no-repeat center bottom / cover !important;
+  z-index: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#mempelai .personal-family-curtain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(246, 241, 233, 0.14) 0%, rgba(246, 241, 233, 0.04) 55%, rgba(246, 241, 233, 0.10) 100%) !important;
+  pointer-events: none;
+}
+#mempelai .personal-family-inner {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: clamp(14px, 4.2vw, 44px) clamp(8px, 2.8vw, 38px) clamp(12px, 3.8vw, 38px) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  box-sizing: border-box;
+}
+#mempelai .personal-family-inner::before {
+  display: none !important;
+}
+#mempelai .personal-family-header {
+  text-align: center;
+  width: 100%;
+  max-width: clamp(250px, 72vw, 480px);
+  margin: 0 auto;
+}
+#mempelai .personal-eyebrow {
+  font-family: Jost, sans-serif;
+  font-size: clamp(7.5px, 2vw, 11px) !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase;
+  color: var(--earth-cognac);
+  margin: 0 0 clamp(2px, 0.6vw, 6px) !important;
+  line-height: 1.3 !important;
+}
+#mempelai .personal-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 5.4vw, 38px) !important;
+  font-weight: 500;
+  line-height: 1.06 !important;
+  color: var(--earth-olive);
+  margin: 0 0 clamp(3px, 0.9vw, 8px) !important;
+}
+#mempelai .personal-intro {
+  font-family: Jost, 'Helvetica Neue', sans-serif;
+  font-size: clamp(8.5px, 2.25vw, 13.5px) !important;
+  line-height: 1.4 !important;
+  max-width: clamp(220px, 64vw, 380px) !important;
+  margin: 0 auto !important;
+  color: var(--earth-olive);
+  opacity: 0.9;
+}
+#mempelai .personal-couple {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  width: 100% !important;
+  max-width: none !important;
+  gap: 0 !important;
+  margin: auto 0 0 !important;
+}
+#mempelai .personal-person {
+  width: 37% !important;
+  max-width: 37% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+#mempelai .personal-person-left {
+  padding-right: clamp(2px, 0.8vw, 10px);
+}
+#mempelai .personal-person-right {
+  padding-left: clamp(2px, 0.8vw, 10px);
+}
+#mempelai .personal-nickname {
+  font-family: 'Allura', cursive !important;
+  font-size: clamp(22px, 6vw, 46px) !important;
+  line-height: 1.02 !important;
+  color: var(--earth-cognac) !important;
+  margin: 0 0 2px !important;
+}
+#mempelai .personal-person-divider {
+  display: block;
+  width: clamp(18px, 4.5vw, 34px);
+  height: 1px;
+  background: var(--earth-sand);
+  opacity: 0.75;
+  margin: 1px auto clamp(3px, 0.8vw, 7px);
+  transform-origin: center;
+}
+#mempelai .personal-person h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(10.5px, 2.85vw, 21px) !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  color: var(--earth-olive) !important;
+  margin: 0 0 clamp(2px, 0.6vw, 6px) !important;
+  max-width: 100%;
+  text-wrap: balance;
+}
+#mempelai .personal-parents {
+  font-family: Jost, 'Helvetica Neue', sans-serif !important;
+  font-size: clamp(7px, 1.85vw, 12px) !important;
+  line-height: 1.34 !important;
+  color: var(--earth-olive) !important;
+  opacity: 0.86;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  text-wrap: pretty;
+}
+#mempelai .personal-parent-line {
+  display: block;
+}
+
+/* Join section backgrounds without the outer cream spacer bands. */
+.personal-family,.personal-story,.personal-dinner,.personal-thankyou{margin-block:0}
+.personal-family-curtain,.personal-story-curtain{border-radius:0;box-shadow:none}
+.invitation-dresscode{padding-block:24px}
+#wedding-gift{padding-block:0}
+@media(min-width:768px){.invitation-dresscode{padding-block:32px}}
