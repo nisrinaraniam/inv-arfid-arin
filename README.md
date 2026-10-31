@@ -1,88 +1,30 @@
-# Undangan Digital Arfid & Arin (React + Vite + TanStack)
+# Undangan Arfid & Arin
 
-Undangan pernikahan digital berbasis **React 18 / 19**, **Vite**, dan **TanStack Router & Query** (Mode Client-Side Only / SPA).
+Jalankan `npm start` atau `node server.mjs`, lalu buka http://localhost:8787.
+Tidak perlu memasang dependency tambahan.
 
-## 🚀 Memulai (Development & Build)
+## Detail
+- Pria: Arfid Gamal S.T (Arfid), ditampilkan lebih dahulu.
+- Wanita: dr. Vanetka Daarin Haya (Arin).
+- Acara: Intimate Dinner, Sabtu, 5 Desember 2026 pukul 19.00 WITA.
+- Tempat: Grand Ballroom Hotel Aruna Senggigi Resort & Convention.
+- Data nama orang tua, alamat lengkap, dan Maps ada di `personalization.js`.
+- Foto masih menggunakan contoh demo; pemilik akan memilih fotonya sendiri.
+- Footer: custom invitation by riungin.id.
 
-Anda dapat menggunakan `npm`, `pnpm`, `yarn`, atau `bun`:
+## Perilaku lokal
+RSVP disimpan di browser ini pada `arfid-arin:rsvps:v1`, tanpa backend bersama.
+Countdown menggunakan waktu acara `2026-12-05T19:00:00+08:00`.
+Tautan Maps dan kalender memakai data acara tersebut.
+Semua aset tampilan tersimpan lokal. Peta/kalender terbuka saat tombolnya ditekan.
 
-### 1. Jalankan Mode Development (Vite Dev Server)
-```bash
-npm install
-npm run dev
-```
-Akses di browser: `http://localhost:5173` (atau port yang ditentukan Vite).
+Pembuka menampilkan monogram A & A. Lapisan video dan poster tidak ditampilkan sebelum gambar A & A selesai didekode dan posisinya siap, sehingga inisial lama tidak berkedip saat pemuatan. Posisi monogram mengikuti gerakan segel video. Tombol Lewati pembuka tetap tersedia.
 
-### 2. Build untuk Produksi (Static Client-Side SPA)
-```bash
-npm run build
-```
-Hasil build akan dihasilkan di folder `dist/` dan siap di-deploy langsung ke:
-- **Vercel**
-- **Netlify**
-- **GitHub Pages**
-- **Cloudflare Pages**
-- Atau hosting statis lainnya tanpa memerlukan server runtime backend.
+## Berkas
+- `personalization.js`: data acara dan komponen tambahan.
+- `personalization.css`: tata letak dan gaya personalisasi.
+- `local.js`: monogram pembuka dan kesiapan aset.
+- `assets/index-C7F6jN74.js`: presentasi dan interaksi dasar dalam bentuk terkompilasi.
+- `asset-manifest.json`: daftar aset lokal; lisensi font berada di `licenses/`.
 
-### 3. Preview Hasil Build
-```bash
-npm run preview
-# atau jalankan server lokal:
-node server.mjs
-```
-
----
-
-## 📁 Struktur Project (React + TypeScript)
-
-```
-mother-of-pearl/
-├── src/
-│   ├── components/         # Komponen Modular React
-│   │   ├── Opener.tsx           # Animasi segel video monogram pembuka
-│   │   ├── Hero.tsx             # Cover / Hero banner & Personalized greeting (?to=...)
-│   │   ├── QuoteVideo.tsx       # Interlude video quote cinta (H.264)
-│   │   ├── Family.tsx           # The Couple (Rasio 4:3, nama mempelai kiri-kanan & animasi scroll)
-│   │   ├── PearlScratch.tsx     # Card mutiara foto mempelai
-│   │   ├── LoveStory.tsx        # Timeline perjalanan cinta Arfid & Arin
-│   │   ├── Countdown.tsx        # Hitung mundur real-time & tombol Add to Google Calendar
-│   │   ├── IntimateDinner.tsx   # Detail acara, ilustrasi watercolor, dan tombol Google Maps
-│   │   ├── Gallery.tsx          # Moments in Frames (6 foto, triptych arches holder & lightbox)
-│   │   ├── DressCode.tsx        # Panduan busana Black Formal
-│   │   ├── WeddingGift.tsx      # Crystal frame amplop digital (Bank BCA & copy button)
-│   │   ├── Rsvp.tsx             # Form RSVP interaktif (Tombol Hadir/Tidak Hadir, plus-one, anak)
-│   │   ├── RsvpConfirmation.tsx # Card konfirmasi instan senada warna olive
-│   │   ├── LiveWishes.tsx       # Real-time wishes terhubung ke Google Spreadsheet
-│   │   ├── ThankYou.tsx         # Ucapan terima kasih & monogram penutup
-│   │   └── MusicPlayer.tsx      # Audio player musik latar (loop & mute toggle)
-│   ├── data/
-│   │   └── wedding.ts           # Data nama, tanggal, lokasi, rekening, foto, dan endpoint Google Apps Script
-│   ├── routes/
-│   │   └── index.tsx            # Halaman utama undangan
-│   ├── styles/
-│   │   ├── fonts.css            # Tipografi (Allura, Ballet, Cormorant Garamond, Jost)
-│   │   ├── index.css            # Styling dasar
-│   │   ├── local.css            # Animasi segel monogram pembuka
-│   │   ├── personalization.css  # Layout & styling kustom
-│   │   └── earth-palette.css    # Palet warna Earthy (Olive, Cream, Sand, Cognac)
-│   ├── router.tsx          # Konfigurasi TanStack Router (Client-Side Only SPA)
-│   └── main.tsx            # Entry point React DOM & TanStack Query Provider
-├── google-apps-script.js   # Script backend Google Spreadsheet (Database RSVP & Live Wishes)
-├── vite.config.ts          # Konfigurasi bundler Vite
-├── tsconfig.json           # Konfigurasi TypeScript
-├── package.json            # Dependencies & build scripts
-└── server.mjs              # Local static server fallback
-```
-
----
-
-## 📊 Database Google Spreadsheet (RSVP & Live Wishes)
-
-Undangan ini telah terintegrasi dengan Google Apps Script:
-- File script tersedia di [`google-apps-script.js`](./google-apps-script.js).
-- Buka Google Sheets $\rightarrow$ Ekstensi $\rightarrow$ Apps Script $\rightarrow$ Paste kode tersebut $\rightarrow$ Deploy sebagai Web App (`Anyone`).
-- Tempelkan URL `/exec` ke `src/data/wedding.ts` pada properti `gasEndpoint`.
-- Fitur bawaan:
-  1. **Mode UID:** Tamu membuka link dengan `?to=Nama+Tamu&uid=UID-123`, nama langsung terisi otomatis dan status di baris tamu pada spreadsheet langsung ter-update.
-  2. **Mode Publik:** Tamu mengisi nama sendiri, data otomatis menambahkan baris baru di spreadsheet.
-  3. **Live Wishes:** Ucapan dari tamu langsung tampil di website secara real-time.
+Artwork pihak ketiga tetap milik pemilik masing-masing. Segel A & A dibuat menggunakan imagegen; prompt dan hasilnya tercatat di `generated-assets.json`.
