@@ -1,0 +1,133 @@
+/* Palette supplied by the couple: olive, sage, cognac, cream, sand, brown. */
+:root{
+ --font-script: 'Allura', cursive;
+ --earth-olive:#4d4930;--earth-sage:#9b9772;--earth-cognac:#6d3914;--earth-cream:#ebdfc7;--earth-sand:#b89f77;--earth-brown:#634120;
+ --background:40 47.368% 85.098%;--foreground:51.724 23.2% 24.51%;--ivory:40 47.368% 85.098%;--sage-dark:51.724 23.2% 24.51%;--gold:36.923 31.401% 59.412%;
+}
+body{background:var(--earth-cream);color:var(--earth-olive)}
+.personal-heading{font-weight:500;letter-spacing:-.025em}
+.personal-eyebrow{color:var(--earth-cognac);font-weight:400}
+.personal-family{color:var(--earth-olive)}
+.personal-family-inner>.personal-couple{max-width:1040px;margin-inline:auto}
+.personal-intro,.personal-parents{font-family:Jost,'Helvetica Neue',sans-serif;font-weight:400;font-size:14px;line-height:1.85;opacity:1}
+.personal-nickname{color:var(--earth-cognac)}.personal-person h3{font-weight:500;color:var(--earth-olive)}.personal-amp{color:var(--earth-cognac);opacity:.8}
+.personal-dinner{color:var(--earth-cognac)}.personal-event-note{font-family:Jost,sans-serif}.personal-rule{background:var(--earth-sage)}
+.pearl-button{color:var(--earth-cognac);border-color:#6d391480}.pearl-button span{border-color:#6d39144d}.pearl-button:hover span{background:var(--earth-cognac);color:var(--earth-cream)}
+/* The Venue: Shell Frame on Cream */
+.personal-location{position:relative;max-width:none;padding:95px 24px 115px;background:var(--earth-cream);color:var(--earth-olive);text-align:center}
+
+/* Gallery: Earth Brown Background */
+.personal-gallery{position:relative;max-width:none;padding:100px 24px 110px;background:var(--earth-brown);color:var(--earth-cream);text-align:center}
+.personal-gallery::before,.personal-gallery::after{content:'';display:block;height:1px;width:76px;background:var(--earth-sand);margin:0 auto 36px;opacity:.7}
+.personal-gallery::after{margin:36px auto 0}
+.personal-gallery .personal-eyebrow{color:var(--earth-cream);opacity:.9}
+.personal-gallery .personal-heading{color:var(--earth-cream)}
+.personal-gallery-grid{gap:18px}
+.personal-gallery-grid button{background:#422a18;outline:1px solid rgba(235,223,199,0.35);outline-offset:5px}
+.personal-lightbox{background:var(--earth-cream);color:var(--earth-olive)}.personal-lightbox::backdrop{background:#272719ed}.lightbox-close{background:#ebdfc7db}
+/* The original image edge is hidden so the RSVP opens cleanly into olive. */
+#rsvp{background:var(--earth-olive);color:var(--earth-cream);margin-top:0;padding-top:34px}
+#rsvp>img{display:none}
+#rsvp h2,#rsvp p,#rsvp label,#rsvp input,#rsvp textarea,#rsvp button,#rsvp span{color:var(--earth-cream)}
+#rsvp>div>div{padding-top:18px}
+#rsvp p{font-family:Jost,sans-serif;font-size:14px;line-height:1.9}
+#rsvp label{font-family:Jost,sans-serif}
+#rsvp input,#rsvp textarea{border-color:#ebdfc766;background:#ebdfc708;font-family:'Cormorant Garamond',serif;font-size:19px}
+#rsvp input::placeholder,#rsvp textarea::placeholder{color:#ebdfc7b3}
+#rsvp input:focus-visible,#rsvp textarea:focus-visible{outline-color:var(--earth-sand);border-color:var(--earth-cream)}
+#rsvp button[type=submit]{border-color:var(--earth-sand)}
+#rsvp button[type=submit]:hover span span{background:var(--earth-cream);color:var(--earth-olive)}
+#rsvp [role=radio]{border-color:#ebdfc780}
+#rsvp-confirmation{background:transparent;color:var(--earth-cream)}
+#rsvp-confirmation h2,#rsvp-confirmation p{color:var(--earth-cream)}
+#rsvp-confirmation button.rsvp-confirm-btn{color:var(--earth-cream);border-color:rgba(235,223,199,0.45);background:rgba(235,223,199,0.06)}
+#rsvp-confirmation button.rsvp-confirm-btn:hover{background:var(--earth-cream);color:var(--earth-olive);border-color:var(--earth-cream)}
+.personal-thankyou{background:var(--earth-sand);color:var(--earth-olive);padding-block:95px 65px}
+.personal-thankyou p{color:var(--earth-olive)}.personal-thankyou p.font-doulaise{color:var(--earth-cognac)}
+.personal-thankyou p.font-doulaise span{color:var(--earth-brown)}
+.personal-thankyou p:last-child{font-family:Jost,sans-serif;color:var(--earth-brown);font-size:13px}
+.personal-thankyou a{color:var(--earth-brown)}
+#countdown img{filter:sepia(.63) saturate(.6)}
+#countdown h2, #countdown p, #countdown span, #countdown div { color: var(--earth-brown) !important; }
+.quote-film{color:var(--earth-cream);background:var(--earth-olive)}
+.quote-film-shade{background:linear-gradient(180deg,#18190e55 0%,#18190e8f 34%,#18190e8f 67%,#22190f75 100%)}
+.quote-film-copy p{color:var(--earth-cream)}
+.local-skip{border-color:#4d493066;color:var(--earth-olive);background:#ebdfc7dd}
+:is([aria-label="Open wedding invitation"], [aria-label="Buka undangan pernikahan"]):not([data-monogram-ready="true"])::before{color:var(--earth-olive);background:var(--earth-cream)}
+:focus-visible{outline-color:var(--earth-cognac)}
+
+/* Overall font scaling: refined, high-end proportions to avoid oversized pop-up look */
+h2.font-doulaise, .font-doulaise.text-6xl, .font-doulaise.text-7xl, .font-doulaise.text-8xl, .font-doulaise.text-5xl {
+  font-size: clamp(34px, 5vw, 46px) !important;
+  line-height: 1.05 !important;
+}
+h2.font-display, .font-display.text-5xl, .font-display.text-7xl {
+  font-size: clamp(28px, 4vw, 38px) !important;
+  line-height: 1.1 !important;
+}
+.font-doulaise.text-3xl, .font-doulaise.text-4xl {
+  font-size: clamp(18px, 2.8vw, 24px) !important;
+}
+.personal-thankyou p.font-doulaise {
+  font-size: clamp(32px, 4.8vw, 44px) !important;
+}
+#rsvp h2 {
+  font-size: clamp(28px, 4vw, 38px) !important;
+}
+p.font-display.text-\[43px\], p.font-display.md\:text-\[67px\] {
+  font-size: clamp(26px, 3.8vw, 36px) !important;
+}
+.countdown-container h2, section div[class*="text-[7vw]"] {
+  font-size: clamp(22px, 3.6vw, 34px) !important;
+}
+section div[class*="text-[8vw]"] {
+  font-size: clamp(24px, 4vw, 38px) !important;
+}
+/* Decorative Script – Allura Calligraphy */
+.font-doulaise, .font-ballet, .font-script, .personal-nickname {
+  font-family: 'Allura', cursive !important;
+  font-weight: 400 !important;
+}
+.font-ballet {
+  font-size: clamp(38px, 5.5vw, 54px) !important;
+  line-height: 1.1 !important;
+}
+.personal-nickname {
+  font-size: clamp(36px, 5vw, 46px) !important;
+  line-height: 1.15 !important;
+}
+
+.personal-dinner h2, .personal-dinner-title { font-family: 'Allura', cursive !important; color: var(--earth-cognac) !important; }
+
+/* Calendar action occupies the former closing greeting position. */
+#countdown .countdown-calendar-slot{position:absolute;left:0;right:0;bottom:7%;display:flex;justify-content:center;z-index:10}
+#countdown .countdown-calendar-slot .pearl-button{margin-top:0;max-width:calc(100% - 32px)}
+#countdown .countdown-calendar-slot .pearl-button>span{display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+#countdown .countdown-calendar-slot svg{flex-shrink:0;margin-right:0}
+@media(max-width:767px){
+  #countdown .countdown-calendar-slot .pearl-button>span{min-height:36px;padding:9px 16px;font-size:9px;letter-spacing:.15em}
+}
+/* A translucent, understated card over the garden. */
+.personal-family{padding:clamp(210px,31vw,280px) clamp(28px,7vw,64px) 84px;min-height:0}
+.personal-family-inner{max-width:440px;padding:32px 24px 34px;background:linear-gradient(145deg,rgba(250,246,236,.72),rgba(239,230,210,.66));border:1px solid rgba(184,159,119,.38);border-radius:22px;box-shadow:0 8px 24px rgba(77,73,48,.07),inset 0 1px 0 rgba(255,255,255,.4);backdrop-filter:blur(3px)}
+.personal-family-inner::before{content:'';position:absolute;inset:6px;border:1px solid rgba(184,159,119,.25);border-radius:17px;pointer-events:none}
+.personal-family .personal-eyebrow{font-size:9px;margin-bottom:12px}
+.personal-family .personal-heading{font-size:28px;line-height:1.15}
+.personal-family .personal-intro{font-size:12px;line-height:1.8;max-width:310px;margin:14px auto 24px;color:var(--earth-olive)}
+.personal-family .personal-couple{display:flex;flex-direction:column;gap:14px;align-items:center}
+.personal-family .personal-person{width:100%;max-width:320px}
+.personal-family .personal-nickname{font-size:36px!important;line-height:1.15!important;margin-bottom:6px}
+.personal-family .personal-person h3{font-size:22px;line-height:1.25;text-wrap:balance}
+.personal-family .personal-parents{font-size:12px;line-height:1.8;max-width:300px;margin:10px auto 0;color:var(--earth-olive);text-wrap:pretty}
+.personal-family .personal-amp{display:flex;align-items:center;gap:14px;font-size:23px;line-height:1.2;opacity:1;margin:2px 0}
+.personal-family .personal-amp::before,.personal-family .personal-amp::after{content:'';width:38px;height:1px;background:var(--earth-sand);opacity:.5}
+@media(max-width:380px){.personal-family-inner{padding:30px 20px 32px}.personal-family .personal-person h3{font-size:21px}}
+
+/* Join section backgrounds without the outer cream spacer bands. */
+.personal-family,.personal-story,.personal-dinner,.personal-thankyou{margin-block:0}
+.personal-family-curtain,.personal-story-curtain{border-radius:0;box-shadow:none}
+.invitation-dresscode{padding-block:24px}
+#wedding-gift{padding-block:0}
+@media(min-width:768px){.invitation-dresscode{padding-block:32px}}
+
+.personal-family .personal-parent-line{display:block}

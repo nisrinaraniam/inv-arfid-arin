@@ -1,0 +1,7 @@
+.local-skip{position:absolute;z-index:60;right:18px;bottom:18px;border:1px solid #5a687a55;background:#f3eee4dd;color:#526174;padding:8px 14px;font:11px Jost,sans-serif;letter-spacing:.08em;cursor:pointer}
+:focus-visible{outline:2px solid #a38c5c;outline-offset:5px}
+#registry-dialog{color:#526174;background:#f4eee4;border:1px solid #c8b78e;max-width:min(430px,90vw);padding:42px;text-align:center;box-shadow:0 15px 80px #2224}
+#registry-dialog::backdrop{background:#38465377;backdrop-filter:blur(4px)}
+#registry-dialog h2{font:46px 'Cormorant Garamond',serif;margin-bottom:20px}
+#registry-dialog p{font:14px/1.7 Jost,sans-serif;margin-top:15px}
+.dialog-close{position:absolute;top:8px;right:14px;font-size:26px;cursor:pointer}

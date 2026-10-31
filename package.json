@@ -1,0 +1,1 @@
+{"name":"mother-of-pearl-local","private":true,"version":"1.0.0","scripts":{"start":"node server.mjs"},"description":"Local reproduction of the Mother of Pearl wedding invitation"}

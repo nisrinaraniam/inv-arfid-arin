@@ -1,0 +1,50 @@
+{
+  "source": "User supplied ARFID + ARIN.mov",
+  "duration_seconds": 35.72,
+  "audio": false,
+  "mobile": "720x1080 H.264 MP4",
+  "desktop": "1440x570 H.264 MP4",
+  "purpose": "Muted looping video background for the quote section",
+  "portrait_focal_points": [
+    [
+      0,
+      930
+    ],
+    [
+      4,
+      730
+    ],
+    [
+      8,
+      1340
+    ],
+    [
+      12,
+      780
+    ],
+    [
+      16,
+      960
+    ],
+    [
+      20,
+      1450
+    ],
+    [
+      24,
+      960
+    ],
+    [
+      28,
+      1050
+    ],
+    [
+      32,
+      1340
+    ],
+    [
+      35.7,
+      1260
+    ]
+  ]
+}

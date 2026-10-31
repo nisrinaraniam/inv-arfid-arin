@@ -1,0 +1,750 @@
+/* Arfid & Arin: typography and layout additions to the pearl invitation. */
+.personal-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.8vw,38px);font-weight:400;line-height:1.15}
+.personal-eyebrow{font:500 10px/1.6 Jost,sans-serif;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.personal-family{position:relative;max-width:768px;min-height:920px;margin:40px auto 0;padding:310px 14% 140px;text-align:center;color:#4d4930;box-sizing:border-box}
+.personal-family-curtain{position:absolute;inset:0;pointer-events:none;background:url('/assets/mempelai-garden.jpg') no-repeat center top / 100% 100%;z-index:0;border-radius:14px;overflow:hidden}
+.personal-family-curtain::after{content:'';position:absolute;inset:0;background:rgba(246,241,233,0.32);pointer-events:none}
+.personal-family-inner{position:relative;z-index:1;background:transparent;border:none;box-shadow:none;backdrop-filter:none;max-width:540px;margin:0 auto;padding:0}
+.personal-intro{max-width:380px;margin:16px auto 32px;font:12px/1.7 'Helvetica Neue',Arial,sans-serif;opacity:.88}
+.personal-couple{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center}
+.personal-nickname{font:44px/1.2 'Allura',cursive;margin-bottom:2px}
+.personal-person h3{font:21px/1.2 'Cormorant Garamond',serif;max-width:320px;margin:auto;font-weight:500}
+.personal-parents{font:11.5px/1.7 'Helvetica Neue',Arial,sans-serif;max-width:280px;margin:12px auto 0;opacity:.85}
+.personal-amp{font:28px 'Cormorant Garamond',serif;opacity:.45}
+.scratch-section{max-width:820px;margin:0 auto}
+.personal-dinner{position:relative;max-width:768px;min-height:1060px;margin:40px auto 0;padding:210px 22% 210px;text-align:center;color:#506579}
+.personal-curtain{position:absolute;inset:0;pointer-events:none;border-style:solid;border-color:transparent;border-width:570px 0 300px;border-image-source:url('/__l5e/assets-v1/d1983d34-838c-4add-9f18-5f584acd2588/timeline-curtain-tall.png');border-image-slice:55% 0 30% fill;border-image-repeat:stretch}
+.personal-dinner-content{position:relative}
+.personal-dinner h2, .personal-dinner-title{font-family:'Allura',cursive !important;font-size:clamp(46px,6.8vw,58px) !important;line-height:1.05 !important;color:var(--earth-cognac);font-weight:400;margin:8px 0 20px}
+.personal-dinner .personal-eyebrow{font-size:8.5px;letter-spacing:.18em}
+.personal-event-date{display:flex;flex-direction:column;font:16px/1.25 'Cormorant Garamond',serif}
+.personal-event-date strong{font:50px/1.1 'Cormorant Garamond',serif}
+.personal-rule{width:30px;height:1px;background:#a89978;margin:16px auto}
+.personal-time{font:24px/1.2 'Cormorant Garamond',serif}.personal-time small{font:10.5px Jost,sans-serif;letter-spacing:.12em}
+.personal-venue-short{font:18px 'Cormorant Garamond',serif;margin:16px 0 4px}.personal-venue-name{font:13.5px/1.5 'Cormorant Garamond',serif}.personal-event-note{font:11px/1.6 'Helvetica Neue',Arial,sans-serif;margin:16px auto;max-width:280px}
+.pearl-button{display:inline-block;border:1px solid #50657966;padding:3px;color:#506579;margin-top:14px}.pearl-button span{display:block;border:1px solid #50657940;padding:14px 24px;font:10px Jost,sans-serif;letter-spacing:.18em;text-transform:uppercase;transition:background .3s,color .3s}.pearl-button:hover span{background:#506579;color:#f5f0e7}
+/* The Venue Card with Pearl Shell Frame (seamless cream background, no white card) */
+.personal-location{text-align:center;color:var(--earth-olive);padding:75px 20px 95px;width:100%;max-width:none;margin:0 auto;background:var(--earth-cream)}
+.personal-venue-card{position:relative;max-width:390px;margin:0 auto;background:transparent}
+.personal-venue-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none;z-index:1}
+.personal-venue-content{position:relative;z-index:2;padding:120px 22% 140px;text-align:center}
+.personal-venue-rule{width:26px;height:1px;background:var(--earth-sand);margin:8px auto 10px;opacity:.5}
+.personal-venue-content .personal-eyebrow{color:var(--earth-cognac);font:500 9.5px/1.3 Jost,sans-serif;letter-spacing:.22em;text-transform:uppercase;margin-bottom:3px}
+.personal-venue-content .personal-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(25px,3.2vw,32px);color:var(--earth-olive);margin:0;line-height:1.15}
+.personal-venue-content .personal-location-title{font:40px/1 'Monsieur La Doulaise Local',cursive;color:var(--earth-cognac);margin:6px 0 2px}
+.personal-venue-content .personal-venue-name{font-family:'Cormorant Garamond',serif;font-size:17.5px;line-height:1.25;color:var(--earth-olive);margin:2px 0 10px;font-weight:500}
+.personal-venue-content .personal-address{font-family:Jost,'Helvetica Neue',sans-serif;font-size:10.5px;line-height:1.6;color:var(--earth-olive);opacity:.85;max-width:215px;margin:0 auto 16px}
+.personal-venue-content .pearl-button{display:inline-block;color:var(--earth-olive);border:1px solid rgba(99,65,32,0.35);padding:2px;margin-top:2px}
+.personal-venue-content .pearl-button span{display:block;border:1px solid rgba(99,65,32,0.2);padding:8px 16px;font:8.5px Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s}
+.personal-venue-content .pearl-button:hover span{color:var(--earth-cream);background:var(--earth-brown)}
+@media(max-width:640px){
+  .personal-location{padding:55px 14px 75px}
+  .personal-venue-card{max-width:340px}
+  .personal-venue-content{padding:105px 20% 125px}
+  .personal-venue-content .personal-location-title{font-size:35px}
+  .personal-venue-content .personal-venue-name{font-size:16px}
+  .personal-venue-content .personal-address{font-size:10px;max-width:190px;margin-bottom:12px}
+  .personal-venue-content .pearl-button span{padding:7px 14px;font-size:8px}
+}
+.personal-gallery{padding:30px 24px 100px;text-align:center;color:#506579;max-width:1040px;margin:auto}.personal-gallery .personal-heading{margin-bottom:40px}
+.personal-gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.personal-gallery-grid button{overflow:hidden;border-radius:180px 180px 6px 6px;cursor:zoom-in;background:#dfd6c7}.personal-gallery-grid button:nth-child(n+3){border-radius:6px 6px 180px 180px}.personal-gallery-grid img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;transition:transform .8s}.personal-gallery-grid button:hover img{transform:scale(1.025)}
+.personal-lightbox{background:#f6f1e9;border:0;padding:25px;max-width:96vw;max-height:95dvh;color:#506579}.personal-lightbox::backdrop{background:#18232fe6;backdrop-filter:blur(7px)}.personal-lightbox>img{max-width:85vw;max-height:76dvh;object-fit:contain}.lightbox-close{position:absolute;right:9px;top:0;font-size:30px;line-height:1;padding:8px;background:#f6f1e9cc;cursor:pointer}.lightbox-controls{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font:13px Jost,sans-serif;gap:40px}.lightbox-controls button{font-size:25px;padding:0 15px;cursor:pointer}
+.local-monogram{position:absolute;left:0;top:0;width:420px;height:480px;transform-origin:0 0;pointer-events:none;z-index:4;will-change:transform}
+/* Never expose the original footage before its personalized seal is decoded. */
+:is([aria-label="Open wedding invitation"], [aria-label="Buka undangan pernikahan"]):not([data-monogram-ready="true"])>img,
+:is([aria-label="Open wedding invitation"], [aria-label="Buka undangan pernikahan"]):not([data-monogram-ready="true"])>video{visibility:hidden!important}
+/* Full-bleed film interlude: designed for portrait screens first. */
+.quote-film{position:relative;isolation:isolate;display:grid;place-items:center;width:100%;height:clamp(520px,82svh,780px);overflow:hidden;background:#182525;color:#faf7f1}
+.quote-film-poster,.quote-film-video{position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover;object-position:center;border:0;pointer-events:none}
+.quote-film-video{z-index:-2;opacity:0;transition:opacity 1.2s ease}.quote-film-video.is-ready{opacity:1}
+.quote-film-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,15,19,.30) 0%,rgba(6,15,19,.52) 34%,rgba(6,15,19,.52) 67%,rgba(6,15,19,.42) 100%);pointer-events:none}
+.quote-film-copy{width:100%;max-width:700px;margin:0;padding:64px 34px;text-align:center;text-wrap:pretty}
+.quote-film-copy p{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(27px,6.9vw,34px);line-height:1.48;letter-spacing:.005em;text-shadow:0 2px 18px #07131680}
+.quote-film-toggle{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));display:grid;place-items:center;width:44px;height:44px;border:1px solid #fff5;border-radius:50%;background:#0a181b25;color:#fff;backdrop-filter:blur(7px);cursor:pointer;transition:background .2s,border-color .2s}
+.quote-film-toggle:hover{background:#0a181b75;border-color:#fff9}.quote-film-toggle:focus-visible{outline:2px solid #faf7f1;outline-offset:5px}
+@media(min-width:768px){.quote-film{height:clamp(580px,78vh,820px)}.quote-film-copy{max-width:820px;padding:80px 70px}.quote-film-copy p{font-size:clamp(35px,3.3vw,46px);line-height:1.45}.quote-film-toggle{right:30px;bottom:28px}}
+@media(max-width:360px){.quote-film-copy{padding-inline:28px}.quote-film-copy p{font-size:26px}}
+
+
+/* Love Story Timeline Section with Drapery Background */
+.personal-story{position:relative;max-width:768px;min-height:850px;margin:40px auto 35px;padding:110px 12% 90px;text-align:center;color:#4d4930}
+.personal-story-curtain{position:absolute;inset:0;pointer-events:none;background:url('/assets/transport-nacre-bg.png') no-repeat center center / cover;z-index:0;border-radius:16px;overflow:hidden;box-shadow:0 12px 36px rgba(50,55,30,0.12)}
+.personal-story-curtain::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.22);pointer-events:none}
+.personal-story-bouquet-top, .personal-story-header, .personal-story-timeline{position:relative;z-index:1}
+.personal-story-bouquet-top{margin:0 auto 14px;text-align:center}
+.personal-story-header{margin-bottom:20px}
+.personal-story-header .personal-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.8vw,42px);color:#4d4930;margin:4px 0 8px}
+.personal-story-header .personal-intro{max-width:380px;margin:0 auto;font-family:Jost,'Helvetica Neue',sans-serif;font-size:12.5px;line-height:1.6;color:#4d4930;opacity:.85}
+.personal-story-timeline{position:relative;max-width:440px;margin:0 auto;padding:6px 0 10px}
+.personal-story-timeline::before{content:'';position:absolute;top:15px;bottom:20px;left:50%;width:1px;background:linear-gradient(180deg,transparent,#b89f77 15%,#b89f77 85%,transparent);transform:translateX(-50%);opacity:.55}
+.personal-story-item{position:relative;margin-bottom:18px;display:flex;flex-direction:column;align-items:center}
+.personal-story-item:last-child{margin-bottom:0}
+.personal-story-node{position:relative;width:9px;height:9px;border-radius:50%;background:#ebdfc7;border:1.5px solid #6d3914;box-shadow:0 0 0 3px #ebdfc7,0 1px 6px #6d391433;margin-bottom:8px;z-index:2;transition:transform .25s ease,background .25s ease}
+.personal-story-item:hover .personal-story-node{transform:scale(1.3);background:#6d3914}
+.personal-story-content{position:relative;max-width:360px;width:100%;padding:12px 18px;background:#f6f1e9c0;backdrop-filter:blur(5px);border:1px solid #b89f774d;border-radius:10px;box-shadow:0 4px 14px -6px #4d493014;transition:transform .25s ease,box-shadow .25s ease}
+.personal-story-content:hover{transform:translateY(-2px);box-shadow:0 6px 18px -6px #4d493022}
+.personal-story-date-badge{display:inline-block;font:500 9.5px/1.3 Jost,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#6d3914;margin-bottom:3px}
+.personal-story-title{font:500 17px/1.25 'Cormorant Garamond',serif;color:#4d4930;margin:0 0 5px}
+.personal-story-text{font:400 12px/1.55 Jost,'Helvetica Neue',sans-serif;color:#4d4930;opacity:.9;margin:0}
+@media(max-width:640px){
+.personal-story{min-height:760px;padding:85px 6% 70px;margin:25px auto 20px}
+.personal-story-bouquet-top{margin-bottom:10px}
+.personal-story-header{margin-bottom:16px}
+.personal-story-header .personal-heading{font-size:28px}
+.personal-story-content{padding:10px 14px;max-width:96%}
+.personal-story-title{font-size:16px}
+.personal-story-text{font-size:11.5px;line-height:1.5}
+.personal-story-item{margin-bottom:14px}
+}
+
+
+/* Botanical Interactive Scroll & Floating Assets (Enlarged across all sections) */
+.personal-family, .personal-story, .personal-dinner, .personal-location, .personal-gallery {
+  position: relative;
+  overflow: visible;
+}
+.botanical-accent {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  user-select: none;
+  filter: drop-shadow(0 14px 30px rgba(77, 73, 48, 0.18));
+}
+.botanical-family-left {
+  left: -58px;
+  top: 14%;
+  width: clamp(160px, 24vw, 250px);
+  animation: gentleSway 9s ease-in-out infinite alternate;
+}
+.botanical-family-right {
+  right: -62px;
+  bottom: 30px;
+  width: clamp(170px, 25vw, 270px);
+  animation: gentleSway 10s ease-in-out 1s infinite alternate-reverse;
+}
+.botanical-story-left {
+  left: -42px;
+  top: 220px;
+  width: clamp(150px, 22vw, 230px);
+  animation: gentleSway 9.5s ease-in-out 0.5s infinite alternate;
+}
+.botanical-story-right {
+  right: -45px;
+  bottom: 180px;
+  width: clamp(160px, 23vw, 240px);
+  animation: gentleSway 8.5s ease-in-out infinite alternate-reverse;
+}
+.botanical-dinner-right {
+  right: -48px;
+  top: 18%;
+  width: clamp(160px, 23vw, 250px);
+  animation: gentleSway 9s ease-in-out 0.8s infinite alternate-reverse;
+}
+.botanical-venue-left {
+  left: -42px;
+  top: 12%;
+  width: clamp(150px, 22vw, 230px);
+  animation: gentleSway 9.5s ease-in-out infinite alternate;
+}
+.botanical-gallery-corner {
+  right: -5px;
+  top: 10px;
+  width: clamp(160px, 24vw, 260px);
+  animation: gentleSway 8s ease-in-out infinite alternate;
+}
+.botanical-gallery-bottom-left {
+  left: -25px;
+  bottom: 25px;
+  width: clamp(160px, 24vw, 260px);
+  animation: gentleSway 9.5s ease-in-out 1s infinite alternate-reverse;
+}
+.botanical-gallery-top-left {
+  left: -28px;
+  top: 40px;
+  width: clamp(140px, 20vw, 220px);
+  animation: gentleSway 9s ease-in-out 0.5s infinite alternate;
+}
+
+/* Love Story Bouquet (Top) - Significantly enlarged */
+.personal-story-bouquet{
+  width: clamp(150px, 22vw, 220px);
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  user-select: none;
+  filter: drop-shadow(0 14px 28px rgba(77,73,48,.22));
+  animation: softFloat 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes gentleSway {
+  0% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(2.5deg) translateY(-5px); }
+  100% { transform: rotate(-2.5deg) translateY(4px); }
+}
+@keyframes softFloat {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-7px) scale(1.02); }
+}
+
+@media (max-width: 640px) {
+  .botanical-family-left {
+    left: -24px;
+    width: 125px;
+    opacity: 0.82;
+  }
+  .botanical-family-right {
+    right: -26px;
+    width: 135px;
+    width: 135px;
+    opacity: 0.82;
+  }
+  .botanical-story-left {
+    left: -20px;
+    width: 115px;
+    opacity: 0.8;
+  }
+  .botanical-story-right {
+    right: -22px;
+    width: 120px;
+    opacity: 0.8;
+  }
+  .botanical-dinner-right {
+    right: -24px;
+    width: 125px;
+    opacity: 0.82;
+  }
+  .botanical-venue-left {
+    left: -20px;
+    width: 115px;
+    opacity: 0.82;
+  }
+  .botanical-gallery-corner {
+    right: -5px;
+    top: 15px;
+    width: 125px;
+    opacity: 0.8;
+  }
+  .botanical-gallery-bottom-left {
+    left: -15px;
+    bottom: 15px;
+    width: 120px;
+    opacity: 0.8;
+  }
+  .botanical-gallery-top-left {
+    left: -15px;
+    top: 25px;
+    width: 105px;
+    opacity: 0.75;
+  }
+  .personal-story-bouquet {
+    width: 130px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botanical-accent, .personal-story-bouquet {
+    animation: none !important;
+  }
+}
+
+/* Thank You: Velvet Drapery Background */
+.personal-thankyou{
+  position:relative;
+  max-width:640px;
+  min-height:880px;
+  margin:50px auto 40px;
+  padding:230px 16% 140px !important;
+  text-align:center;
+  color:var(--earth-olive);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+}
+.personal-thankyou::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:url('/assets/story-curtain.png') no-repeat center center / 100% 100%;
+  z-index:0;
+}
+.personal-thankyou>*{
+  position:relative;
+  z-index:1;
+}
+@media(max-width:640px){
+  .personal-thankyou{
+    min-height:760px;
+    padding:180px 10% 95px !important;
+    margin:25px auto 15px;
+  }
+}
+.personal-dinner .personal-address { font-family: var(--font-sans); font-size: 11.5px; line-height: 1.6; max-width: 290px; margin: 10px auto 16px; opacity: 0.88; color: var(--earth-olive); }
+
+
+/* Wedding Gift with Crystal Petal Frame */
+.personal-gift-card {
+  position: relative;
+  width: 100%;
+  max-width: 410px;
+  aspect-ratio: 768 / 1376;
+  margin: 0 auto;
+}
+.personal-gift-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 55px 14% 65px;
+}
+.personal-gift-title {
+  font-family: 'Allura', cursive !important;
+  font-size: clamp(38px, 6vw, 48px) !important;
+  line-height: 1.1 !important;
+  color: var(--earth-cognac) !important;
+  margin-bottom: 8px;
+  font-weight: 400 !important;
+}
+.personal-gift-quote {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(15px, 2.4vw, 18px) !important;
+  line-height: 1.3 !important;
+  color: var(--earth-brown) !important;
+  margin-bottom: 8px;
+  max-width: 270px;
+}
+.personal-gift-desc {
+  font-family: Jost, 'Helvetica Neue', sans-serif !important;
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+  color: var(--earth-olive) !important;
+  opacity: 0.85;
+  margin-bottom: 16px;
+  max-width: 250px;
+}
+.personal-gift-bank-box {
+  width: 100%;
+  max-width: 260px;
+  padding: 12px 14px;
+  border: 0;
+  background: transparent;
+  margin-bottom: 16px;
+  box-shadow: none;
+}
+.personal-gift-bank-name {
+  font-family: Jost, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--earth-olive);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.personal-gift-bank-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--earth-brown);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.personal-gift-bank-holder {
+  font-family: Jost, sans-serif;
+  font-size: 11.5px;
+  color: var(--earth-olive);
+  opacity: 0.9;
+}
+
+/* Supplied resort artwork stays in the normal layout below the map action. */
+.personal-resort-illustration{display:block;position:static;width:100%;max-width:420px;height:auto;object-fit:contain;margin:28px auto 0;pointer-events:none}
+
+
+/* Dress Code Section Typography & Enlarged Sizing */
+.dresscode-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 16% 5%;
+  pointer-events: none;
+  user-select: none;
+}
+.dresscode-heading {
+  font-family: 'Cormorant Garamond', serif !important;
+  color: var(--earth-brown) !important;
+  font-weight: 500 !important;
+}
+.dresscode-details {
+  margin-top: 8px;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+}
+.dresscode-title-note {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(15.5px, 2.6vw, 19px) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  color: var(--earth-brown) !important;
+  margin: 0 0 6px !important;
+  line-height: 1.25 !important;
+}
+.dresscode-desc-line {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(13.5px, 2.2vw, 16px) !important;
+  line-height: 1.4 !important;
+  color: var(--earth-brown) !important;
+  margin: 0 0 5px !important;
+}
+@media (min-width: 768px) {
+  .dresscode-details {
+    margin-top: 14px;
+  }
+  .dresscode-title-note {
+    margin-bottom: 8px !important;
+  }
+  .dresscode-desc-line {
+    margin-bottom: 6px !important;
+  }
+}
+
+
+/* Hero Go to RSVP Button */
+.hero-rsvp-btn {
+  margin-top: 24px !important;
+  background: rgba(245, 239, 227, 0.5) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 4px 14px rgba(81, 70, 56, 0.08) !important;
+}
+.hero-rsvp-btn:hover {
+  background: rgba(245, 239, 227, 0.85) !important;
+  transform: translateY(-1px);
+}
+.hero-rsvp-btn span {
+  padding: 10px 20px !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.22em !important;
+  font-family: Jost, sans-serif !important;
+  color: var(--earth-brown) !important;
+}
+
+
+/* RSVP Confirmation Card & Live Wishes Section */
+#rsvp #rsvp-confirmation.rsvp-confirmation-card {
+  position: relative;
+  max-width: 580px;
+  margin: 0 auto 24px;
+  padding: 46px 32px 40px;
+  background: linear-gradient(155deg, rgba(235, 223, 199, 0.11) 0%, rgba(235, 223, 199, 0.04) 100%);
+  border: 1px solid rgba(235, 223, 199, 0.34);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(235, 223, 199, 0.18);
+  backdrop-filter: blur(4px);
+}
+#rsvp #rsvp-confirmation.rsvp-confirmation-card::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(235, 223, 199, 0.15);
+  border-radius: 9px;
+  pointer-events: none;
+}
+#rsvp #rsvp-confirmation h2.rsvp-confirm-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(28px, 4.4vw, 40px) !important;
+  font-weight: 400 !important;
+  line-height: 1.18 !important;
+  color: var(--earth-cream) !important;
+  margin: 0 0 22px !important;
+}
+#rsvp #rsvp-confirmation .rsvp-confirm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 460px;
+  margin: 0 auto;
+}
+#rsvp #rsvp-confirmation p.rsvp-confirm-text {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(16px, 2.3vw, 18.5px) !important;
+  line-height: 1.6 !important;
+  color: rgba(235, 223, 199, 0.92) !important;
+  margin: 0 !important;
+}
+#rsvp #rsvp-confirmation p.rsvp-confirm-label {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(15px, 2.1vw, 17px) !important;
+  line-height: 1.5 !important;
+  color: rgba(235, 223, 199, 0.82) !important;
+  margin: 8px 0 0 !important;
+}
+#rsvp #rsvp-confirmation p.rsvp-confirm-date {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(16.5px, 2.4vw, 19px) !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: var(--earth-cream) !important;
+  margin: 0 !important;
+}
+#rsvp #rsvp-confirmation p.rsvp-confirm-signature {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(30px, 4.5vw, 40px) !important;
+  line-height: 1.2 !important;
+  color: var(--earth-cream) !important;
+  margin: 28px 0 26px !important;
+}
+#rsvp #rsvp-confirmation .rsvp-confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+#rsvp #rsvp-confirmation button.rsvp-confirm-btn {
+  background: rgba(235, 223, 199, 0.08) !important;
+  border: 1px solid rgba(235, 223, 199, 0.45) !important;
+  color: var(--earth-cream) !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 16px !important;
+  padding: 10px 22px !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  transition: all 0.25s ease !important;
+}
+#rsvp #rsvp-confirmation button.rsvp-confirm-btn:hover {
+  background: var(--earth-cream) !important;
+  color: var(--earth-olive) !important;
+  border-color: var(--earth-cream) !important;
+}
+#rsvp #rsvp-confirmation button.rsvp-confirm-btn:hover svg {
+  color: var(--earth-olive) !important;
+  stroke: var(--earth-olive) !important;
+}
+#rsvp #rsvp-confirmation button.rsvp-change-link {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 15px !important;
+  color: rgba(235, 223, 199, 0.72) !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 4px 8px !important;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+#rsvp #rsvp-confirmation button.rsvp-change-link:hover {
+  color: var(--earth-cream) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Live Wishes Section */
+#rsvp .live-wishes-wrap {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(235, 223, 199, 0.2);
+  text-align: center;
+  position: relative;
+}
+#rsvp .live-wishes-divider-icon {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--earth-sand) !important;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+#rsvp p.live-wishes-eyebrow {
+  font-family: Jost, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 0.28em !important;
+  text-transform: uppercase;
+  color: rgba(235, 223, 199, 0.7) !important;
+  margin: 0 0 6px !important;
+  line-height: 1.4 !important;
+}
+#rsvp h3.live-wishes-title {
+  font-family: 'Allura', cursive !important;
+  font-size: clamp(42px, 6.2vw, 54px) !important;
+  font-weight: 400 !important;
+  line-height: 1.1 !important;
+  color: var(--earth-cream) !important;
+  margin: 0 0 10px !important;
+}
+#rsvp p.live-wishes-subtitle {
+  font-family: Jost, sans-serif !important;
+  font-size: 13.5px !important;
+  line-height: 1.7 !important;
+  color: rgba(235, 223, 199, 0.8) !important;
+  max-width: 420px;
+  margin: 0 auto 18px !important;
+}
+#rsvp .live-wishes-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(235, 223, 199, 0.26);
+  background: rgba(235, 223, 199, 0.07);
+  font-family: Jost, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--earth-cream) !important;
+  margin-bottom: 28px;
+}
+#rsvp .live-wishes-empty {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  border-radius: 12px;
+  border: 1px dashed rgba(235, 223, 199, 0.25);
+  background: rgba(235, 223, 199, 0.04);
+}
+#rsvp p.live-wishes-empty-text {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 17px !important;
+  font-style: italic;
+  line-height: 1.6 !important;
+  color: rgba(235, 223, 199, 0.78) !important;
+  margin: 0 !important;
+}
+#rsvp .live-wishes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 460px;
+  overflow-y: auto;
+  padding: 4px 6px 8px;
+  text-align: left;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(235, 223, 199, 0.3) transparent;
+}
+#rsvp .live-wishes-list::-webkit-scrollbar {
+  width: 5px;
+}
+#rsvp .live-wishes-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+#rsvp .live-wishes-list::-webkit-scrollbar-thumb {
+  background: rgba(235, 223, 199, 0.28);
+  border-radius: 999px;
+}
+#rsvp .live-wish-card {
+  position: relative;
+  background: linear-gradient(150deg, rgba(235, 223, 199, 0.11) 0%, rgba(235, 223, 199, 0.04) 100%);
+  border: 1px solid rgba(235, 223, 199, 0.25);
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(235, 223, 199, 0.14);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+#rsvp .live-wish-card:hover {
+  border-color: rgba(235, 223, 199, 0.42);
+}
+#rsvp .live-wish-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+#rsvp .live-wish-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+#rsvp .live-wish-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(235, 223, 199, 0.38);
+  background: rgba(235, 223, 199, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 15.5px !important;
+  font-weight: 600;
+  color: var(--earth-cream) !important;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+#rsvp .live-wish-meta {
+  min-width: 0;
+}
+#rsvp h4.live-wish-name {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  color: var(--earth-cream) !important;
+  margin: 0 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#rsvp span.live-wish-time {
+  display: block;
+  font-family: Jost, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(235, 223, 199, 0.58) !important;
+  margin-top: 2px;
+}
+#rsvp span.live-wish-badge {
+  font-family: Jost, sans-serif !important;
+  font-size: 9.5px !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(235, 223, 199, 0.32);
+  background: rgba(235, 223, 199, 0.11);
+  color: var(--earth-cream) !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#rsvp span.live-wish-badge.is-decline {
+  border-color: rgba(235, 223, 199, 0.2);
+  background: rgba(235, 223, 199, 0.05);
+  color: rgba(235, 223, 199, 0.78) !important;
+}
+#rsvp p.live-wish-message {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 17px !important;
+  font-style: italic;
+  line-height: 1.6 !important;
+  color: rgba(235, 223, 199, 0.94) !important;
+  margin: 4px 0 0 50px !important;
+  word-break: break-word;
+}
+@media (max-width: 640px) {
+  #rsvp #rsvp-confirmation.rsvp-confirmation-card {
+    padding: 36px 20px 32px;
+  }
+  #rsvp .live-wishes-wrap {
+    margin-top: 48px;
+    padding-top: 38px;
+  }
+  #rsvp .live-wish-card {
+    padding: 15px 16px;
+  }
+  #rsvp p.live-wish-message {
+    margin-left: 0 !important;
+    margin-top: 10px !important;
+    font-size: 16px !important;
+  }
+}
