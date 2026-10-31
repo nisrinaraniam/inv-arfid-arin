@@ -16,6 +16,8 @@
  *    - Hadir Berdua (+ anak): 2 pax
  * 5. Deteksi Kolom Otomatis:
  *    - Menjamin Pax, Ucapan, dan Status masuk ke kolom yang tepat 100%.
+ * 6. Fitur Reset Data Tes:
+ *    - Menu untuk menghapus seluruh data tes dan ucapan sekali klik.
  *
  * CARA PEMASANGAN / UPDATE:
  * 1. Buka Google Spreadsheet undangan Anda di Google Drive.
@@ -67,6 +69,8 @@ function onOpen() {
       ui.createMenu("👰 Undangan Arfid & Arin")
         .addItem("🛠️ 1. Buat Format Sheet Otomatis", "setupSheet")
         .addItem("✨ 2. Generate UID & Link Tamu Baru", "generateUIDAndLinks")
+        .addSeparator()
+        .addItem("🧹 3. Reset / Hapus Semua Data Tes & Ucapan", "clearAllWishesAndTestData")
         .addToUi();
     }
   } catch (e) {}
@@ -166,6 +170,26 @@ function generateUIDAndLinks() {
 }
 
 /**
+ * Fungsi 3: Menghapus seluruh baris data tes dan ucapan (mereset sheet menjadi kosong bersih)
+ */
+function clearAllWishesAndTestData() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) return;
+  const lastRow = sheet.getLastRow();
+  if (lastRow >= 2) {
+    sheet.deleteRows(2, lastRow - 1);
+    try {
+      SpreadsheetApp.getUi().alert("Berhasil! Semua data ucapan dan baris tes telah dihapus. Tabel kembali bersih.");
+    } catch (e) {}
+  } else {
+    try {
+      SpreadsheetApp.getUi().alert("Tabel sudah bersih, tidak ada data yang perlu dihapus.");
+    } catch (e) {}
+  }
+}
+
+/**
  * Helper: Mencari letak index kolom secara tepat dari header baris ke-1
  */
 function getColumnMapping(sheet) {
@@ -193,12 +217,11 @@ function getColumnMapping(sheet) {
     }
   }
 
-  // Jika kolom ucapan belum ketemu dari keyword:
   if (colMessage === -1) {
     if (colDietary > 0) {
-      colMessage = colDietary + 1; // Jika ada pantangan di col 8, ucapan di col 9
+      colMessage = colDietary + 1;
     } else {
-      colMessage = 8; // Default H
+      colMessage = 8;
     }
   }
 
@@ -269,7 +292,6 @@ function doGet(e) {
       const message = String(data[i][msgIdx] || "").trim();
       const date = data[i][timeIdx];
 
-      // Pastikan bukan angka pax dan bukan pesan kosong
       if (name && message && isNaN(Number(message))) {
         wishes.push({
           name: name,
@@ -298,6 +320,17 @@ function doPost(e) {
     }
 
     const payload = JSON.parse(e.postData.contents);
+
+    // Opsi reset semua data via POST jika diminta
+    if (payload.action === "clear_all_wishes") {
+      const ss = SpreadsheetApp.getActiveSpreadsheet();
+      const sheet = ss.getSheetByName(SHEET_NAME);
+      if (sheet && sheet.getLastRow() >= 2) {
+        sheet.deleteRows(2, sheet.getLastRow() - 1);
+      }
+      return jsonResponse({ status: "success", message: "All wishes cleared" });
+    }
+
     const name = payload.name ? String(payload.name).trim() : "";
     const rsvpStatus = payload.rsvpStatus || (payload.attendance === "yes" ? "attending" : "not_attending");
     const origin = payload.origin || "";
@@ -361,13 +394,11 @@ function doPost(e) {
     const statusLabel = isAttending ? "Hadir" : "Tidak Hadir";
 
     if (rowIndexToUpdate > 0) {
-      // 1. UPDATE baris tamu yang sudah ada
       sheet.getRange(rowIndexToUpdate, mapping.status).setValue(statusLabel);
       sheet.getRange(rowIndexToUpdate, mapping.pax).setValue(pax);
       sheet.getRange(rowIndexToUpdate, mapping.message).setValue(message);
       sheet.getRange(rowIndexToUpdate, mapping.time).setValue(now);
     } else {
-      // 2. Mode Publik: Tambahkan baris baru sesuai struktur kolom sheet
       const newUid = uid || generateRandomUID(8);
       const guestEncoded = encodeURIComponent(name);
       const uidEncoded = encodeURIComponent(newUid);
