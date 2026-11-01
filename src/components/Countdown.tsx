@@ -26,7 +26,7 @@ export const Countdown: React.FC = () => {
 
   const openGoogleCalendar = () => {
     const title = `Intimate Dinner ${wedding.groom.nickname} & ${wedding.bride.nickname}`;
-    const desc = `Intimate Dinner of Arfid & Arin, Saturday, 5 December 2026 at 7:00 PM WITA.`;
+    const desc = `Intimate Dinner of Arfid & Arin, Saturday, 5 December 2026 at 19.00 WITA.`;
     const loc = wedding.address;
     const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       title

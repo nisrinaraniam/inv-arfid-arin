@@ -24,7 +24,7 @@ export const wedding = {
   date: '2026-12-05',
   start: '2026-12-05T19:00:00+08:00',
   dateLabel: 'Saturday, 5 December 2026',
-  timeLabel: '7:00 PM WITA',
+  timeLabel: '19.00 WITA',
   event: 'Intimate Dinner',
   venue: 'Grand Ballroom Hotel Aruna Senggigi Resort & Convention',
   address: 'Jl. Raya Senggigi, Senggigi, Kec. Batu Layar, Kabupaten Lombok Barat, Nusa Tenggara Bar. 83355',

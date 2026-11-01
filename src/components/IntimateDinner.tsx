@@ -17,7 +17,7 @@ export const IntimateDinner: React.FC = () => {
         </div>
         <div className="personal-rule" />
         <p className="personal-time">
-          7:00 <small>PM WITA</small>
+          19.00 <small>WITA</small>
         </p>
         <p className="personal-venue-short">Grand Ballroom</p>
         <p className="personal-venue-name">
