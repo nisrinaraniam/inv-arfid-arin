@@ -262,3 +262,14 @@ section div[class*="text-[8vw]"] {
 .invitation-dresscode{padding-block:24px}
 #wedding-gift{padding-block:0}
 @media(min-width:768px){.invitation-dresscode{padding-block:32px}}
+
+
+/* Private access states use the invitation's existing palette and typography. */
+.private-invitation{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:var(--earth-cream);color:var(--earth-olive);text-align:center}
+.private-invitation-content{max-width:460px;margin:auto;padding:36px 18px}
+.private-invitation h1{font:400 clamp(32px,7vw,44px)/1.15 'Cormorant Garamond',Georgia,serif;margin:14px 0 22px;text-wrap:balance}
+.private-invitation-content>p:not(.personal-eyebrow){font:13px/1.9 Jost,sans-serif;max-width:380px;margin:0 auto 18px}
+.private-invitation footer,.riungin-rsvp-credit{font:10px/1.7 Jost,sans-serif;letter-spacing:.025em;opacity:.75;text-align:center}
+.private-invitation footer{padding-top:32px}
+.private-invitation a,.riungin-rsvp-credit a{text-decoration:underline;text-underline-offset:3px}
+.riungin-rsvp-credit{margin:24px auto 0}
